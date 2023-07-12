@@ -7,7 +7,8 @@ const cors = require("cors");
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/", express.static("uploads"));
+app.use(cors());
+app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 //config
