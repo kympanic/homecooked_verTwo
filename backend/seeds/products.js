@@ -2,11 +2,7 @@ const mongoose = require("mongoose");
 const Product = require("../model/product");
 const User = require("../model/user");
 
-// Replace with your actual MongoDB connection string
-const MONGO_URI =
-	"mongodb+srv://danielyoo:CXBGBOuOLqz4tz43@cluster0.gpp3d7y.mongodb.net/";
-
-mongoose.connect(MONGO_URI, {
+mongoose.connect(process.env.DB_URL, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
@@ -14,16 +10,18 @@ mongoose.connect(MONGO_URI, {
 // Sample product data
 const sampleProducts = [
 	{
-		name: "Sample Product 1",
-		description: "This is a sample product description.",
-		image_url: "http://example.com/sample1.jpg",
-		category: "Sample Category",
+		name: "Gigantic Steak",
+		description: "A big steak",
+		image_url:
+			"https://www.tastingtable.com/img/gallery/15-ingredients-that-will-seriously-elevate-your-steak/l-intro-1663169111.jpg",
+		category: "American",
 	},
 	{
-		name: "Sample Product 2",
-		description: "This is another sample product description.",
-		image_url: "http://example.com/sample2.jpg",
-		category: "Sample Category",
+		name: "Cheese Pizza",
+		description: "A cheese pizza",
+		image_url:
+			"https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg",
+		category: "American",
 	},
 	// ... add as many sample products as you like
 ];

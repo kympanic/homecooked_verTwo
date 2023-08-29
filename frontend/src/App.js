@@ -6,10 +6,12 @@ import "./App.css";
 import { useEffect } from "react";
 import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
+import { getAllProducts } from "./redux/actions/product";
 
 function App() {
 	useEffect(() => {
 		Store.dispatch(loadUser());
+		Store.dispatch(getAllProducts());
 	}, []);
 	return (
 		<BrowserRouter>
