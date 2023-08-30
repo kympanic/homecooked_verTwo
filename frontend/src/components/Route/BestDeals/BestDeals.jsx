@@ -20,7 +20,7 @@ const BestDeals = () => {
 			<div className={`${styles.heading}`}>
 				<h1>Most Sold</h1>
 			</div>
-			<div className="grid grid-cols-1 gap-1 md:grid-cols-2 md:gap-2 lg:grid-cols-4 lg:gap-3 xl:grid-cols-5 xl:gap-3.5 ">
+			<div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px] xl:grid-cols-5 xl:gap-[30px] mb-12 border-0 ">
 				{data &&
 					data.map((i, index) => (
 						<ProductCard data={i} key={index} />

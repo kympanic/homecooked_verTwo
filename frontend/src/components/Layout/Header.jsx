@@ -112,7 +112,10 @@ const Header = ({ activeHeading }) => {
 					className={`${styles.section} relative ${styles.normalFlex} justify-between`}
 				>
 					{/* categories */}
-					<div className="relative h-[60px] mt-[10px] w-[200px] hidden 1000px:block">
+					<div
+						onClick={() => setDropDown(!dropDown)}
+						className="relative h-[60px] mt-[10px] w-[200px] hidden 1000px:block"
+					>
 						<BiMenuAltLeft
 							size={30}
 							className="absolute top-3 left-2"
