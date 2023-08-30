@@ -36,3 +36,26 @@ export const categoriesData = [
 			"https://soundcloud-clone-kpop-seeders.s3.us-west-2.amazonaws.com/images/Other.jpg",
 	},
 ];
+
+export const navItems = [
+	{
+		title: "Home",
+		url: "/",
+	},
+	{
+		title: "Best Selling",
+		url: "/best-selling",
+	},
+	{
+		title: "Products",
+		url: "/products",
+	},
+	{
+		title: "Events",
+		url: "/events",
+	},
+	{
+		title: "FAQ",
+		url: "/faq",
+	},
+];
