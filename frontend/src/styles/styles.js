@@ -17,6 +17,8 @@ const styles = {
 	activeStatus:
 		"w-[10px] h-[10px] rounded-full absolute top-0 right-1 bg-[#40d132]",
 	normalFlex: "flex items-center",
+	productsList:
+		"grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px] xl:grid-cols-5 xl:gap-[30px]",
 };
 
 export default styles;

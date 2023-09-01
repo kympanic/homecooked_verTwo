@@ -552,3 +552,94 @@ export const productData = [
 		stock: 10,
 	},
 ];
+
+export const footerProductLinks = [
+	{
+		name: "About Me",
+		link: "https://kympanic.github.io/",
+	},
+	{
+		name: "Github",
+		link: "https://github.com/kympanic",
+	},
+
+	{
+		name: "My Blog",
+		link: "https://dacapo0509.wixsite.com/step-by-tech",
+	},
+	{
+		name: "LinkedIn",
+		link: "https://www.linkedin.com/in/daniel-yoo-b385a6182/",
+	},
+];
+
+export const footercompanyLinks = [
+	{
+		name: "American",
+	},
+	{
+		name: "Asian",
+	},
+	{
+		name: "Italian",
+	},
+	{
+		name: "Vegetarian",
+	},
+	{
+		name: "Events",
+	},
+];
+
+export const footerSupportLinks = [
+	{
+		name: "FAQ",
+	},
+	{
+		name: "Reviews",
+	},
+	{
+		name: "Contact Us",
+	},
+	{
+		name: "Shipping",
+	},
+	{
+		name: "Live chat",
+	},
+];
+
+export const faqData = [
+	{
+		question: "What is your return policy?",
+		answer: "If you are ever unsatisfied with the product you ordered, fill out the return form from the 7 days you received your meal. You will be refunded store credit of the full amount of your purchase",
+	},
+	{
+		question: "How do I track my order?",
+		answer: "You can track your order by clicking the tracking link in your shipping confirmation email, or by logging into your account on our website and viewing the order details.",
+	},
+	{
+		question: "How do I contact customer support?",
+		answer: "You can contact our customer support team by emailing us at support@homecooked.com, or by calling us at (123)456-7890 between the hours of 9am and 5pm EST, Monday through Friday.",
+	},
+	{
+		question: "What can I do in my profile page?",
+		answer: "Every user has their own profile page which shows their information(username,email, etc). The average rating for each profile is the average rating from other users reviews on their trivia packages. You can see your reviews of games you've played and edit/delete them accordingly. There is also a trivia section where you can create your own trivia questions! Finally, you can see your match history from previous matches",
+	},
+	{
+		question: "Can I change or cancel my order?",
+		answer: "Unfortunately, once an order has been placed, we are not able to make changes or cancellations. If you no longer want the items you've ordered, you can return them for a refund within 7 days of delivery.",
+	},
+	{
+		question: "I don't want to create all those questions",
+		answer: "No worries! If you run out of questions to add, you can generate some sample questions, depending on your category and difficulty. Or, you can always come back later and complete it. If you want to change your questions, you can always edit/delete in the add trivia page",
+	},
+	{
+		question: "Do you offer international shipping?",
+		answer: "Currently, we only offer shipping within the United States.",
+	},
+	{
+		question: "What payment methods do you accept?",
+		answer: "We accept visa,mastercard,paypal payment method also we have cash on delivery system.",
+	},
+];
