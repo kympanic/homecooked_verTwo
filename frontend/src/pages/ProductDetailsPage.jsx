@@ -5,6 +5,7 @@ import ProductDetails from "../components/Products/ProductDetails";
 import RecommendedProducts from "../components/Products/RecommendedProducts";
 import { useParams } from "react-router-dom";
 import { productData } from "../static/data";
+import { motion } from "framer-motion";
 
 const ProductDetailsPage = () => {
 	const { name } = useParams();
@@ -18,12 +19,16 @@ const ProductDetailsPage = () => {
 		setData(data);
 	}, []);
 	return (
-		<div>
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+		>
 			<Header />
 			<ProductDetails data={data} />
 			{data && <RecommendedProducts data={data} />}
 			<Footer />
-		</div>
+		</motion.div>
 	);
 };
 

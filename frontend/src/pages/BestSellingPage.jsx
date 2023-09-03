@@ -4,6 +4,7 @@ import styles from "../styles/styles";
 import { useSearchParams } from "react-router-dom";
 import { productData } from "../static/data";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
+import { motion } from "framer-motion";
 
 const BestSellingPage = () => {
 	const [data, setData] = useState([]);
@@ -15,7 +16,11 @@ const BestSellingPage = () => {
 		setData(d);
 	}, []);
 	return (
-		<div>
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+		>
 			<Header activeHeading={2} />
 			<br />
 			<br />
@@ -27,7 +32,7 @@ const BestSellingPage = () => {
 						))}
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

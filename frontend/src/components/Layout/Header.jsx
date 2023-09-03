@@ -16,6 +16,7 @@ import {
 import { backend_url } from "../../server";
 import Cart from "../cart/Cart";
 import Favorites from "../Favorites/Favorites";
+import { motion } from "framer-motion";
 
 const Header = ({ activeHeading }) => {
 	const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -140,6 +141,7 @@ const Header = ({ activeHeading }) => {
 							<DropDown
 								categoriesData={categoriesData}
 								setDropDown={setDropDown}
+								dropDown={dropDown}
 							/>
 						) : null}
 					</div>

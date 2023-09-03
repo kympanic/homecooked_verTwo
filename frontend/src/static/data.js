@@ -631,10 +631,6 @@ export const faqData = [
 		answer: "Unfortunately, once an order has been placed, we are not able to make changes or cancellations. If you no longer want the items you've ordered, you can return them for a refund within 7 days of delivery.",
 	},
 	{
-		question: "I don't want to create all those questions",
-		answer: "No worries! If you run out of questions to add, you can generate some sample questions, depending on your category and difficulty. Or, you can always come back later and complete it. If you want to change your questions, you can always edit/delete in the add trivia page",
-	},
-	{
 		question: "Do you offer international shipping?",
 		answer: "Currently, we only offer shipping within the United States.",
 	},

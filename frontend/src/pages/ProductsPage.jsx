@@ -4,6 +4,7 @@ import styles from "../styles/styles";
 import { useSearchParams } from "react-router-dom";
 import { productData } from "../static/data";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
+import { motion } from "framer-motion";
 
 const ProductsPage = () => {
 	const [searchParams] = useSearchParams();
@@ -24,7 +25,11 @@ const ProductsPage = () => {
 		}
 	});
 	return (
-		<div>
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+		>
 			<Header activeHeading={3} />
 			<br />
 			<br />
@@ -41,7 +46,7 @@ const ProductsPage = () => {
 					</h1>
 				) : null}
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

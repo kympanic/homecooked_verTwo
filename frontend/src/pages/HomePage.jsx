@@ -7,9 +7,15 @@ import FeaturedProduct from "../components/Route/FeaturedProduct/FeaturedProduct
 import Events from "../components/Events/Events.jsx";
 import Sponsored from "../components/Route/Sponsored/Sponsored";
 import Footer from "../components/Layout/Footer";
+import { motion } from "framer-motion";
+
 const HomePage = () => {
 	return (
-		<div>
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+		>
 			<Header activeHeading={1} />
 			<Hero />
 			<Categories />
@@ -18,7 +24,7 @@ const HomePage = () => {
 			<FeaturedProduct />
 			<Sponsored />
 			<Footer />
-		</div>
+		</motion.div>
 	);
 };
 

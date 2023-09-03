@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
 
-const DropDown = ({ categoriesData, setDropDown }) => {
+const DropDown = ({ categoriesData, setDropDown, dropDown }) => {
 	const navigate = useNavigate();
 	const handleSubmit = (i) => {
 		navigate(`/products?category=${i.title}`);
