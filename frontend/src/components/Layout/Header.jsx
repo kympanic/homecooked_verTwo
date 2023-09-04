@@ -14,11 +14,10 @@ import {
 	AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { backend_url } from "../../server";
-import Cart from "../cart/Cart";
+import Cart from "../Cart/Cart";
 import Favorites from "../Favorites/Favorites";
-import { motion } from "framer-motion";
 
-const Header = ({ activeHeading }) => {
+const Header = ({ currentPath }) => {
 	const { isAuthenticated, user } = useSelector((state) => state.user);
 	const { allProducts } = useSelector((state) => state.products);
 	const [searchTerm, setSearchTerm] = useState("");
@@ -101,7 +100,7 @@ const Header = ({ activeHeading }) => {
 						) : null}
 					</div>
 					<div className={`${styles.button}`}>
-						<Link to="/seller">
+						<Link to="/shop-create">
 							<h1 className="text-[#fff] flex items-center">
 								Become Seller
 								<IoIosArrowForward className="ml-1" />
@@ -147,7 +146,7 @@ const Header = ({ activeHeading }) => {
 					</div>
 					{/* navitems */}
 					<div className={`${styles.normalFlex}`}>
-						<Navbar active={activeHeading} />
+						<Navbar active={currentPath} />
 					</div>
 					<div className="flex">
 						<div className={`${styles.normalFlex}`}>
@@ -204,6 +203,60 @@ const Header = ({ activeHeading }) => {
 						{openFavorites ? (
 							<Favorites setOpenFavorites={setOpenFavorites} />
 						) : null}
+					</div>
+				</div>
+			</div>
+			{/* Mobile Header */}
+			<div
+				className={`w-full h-[60px] bg-white z-30 top-0 left-0 shadow-md 800px:hidden ${
+					active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
+				} `}
+			>
+				<div className="w-full flex items-center justify-between">
+					<div>
+						<Link to="/">
+							<h1 className="text-3xl p-4 text-center font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+								HOMECOOKed
+							</h1>
+						</Link>
+					</div>
+					<div className="flex">
+						<div className={`${styles.normalFlex}`}>
+							<div
+								className="relative mr-[15px]"
+								onClick={() => setOpenCart(true)}
+							>
+								<AiOutlineShoppingCart
+									size={30}
+									color="black"
+								/>
+								<span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+									1
+								</span>
+							</div>
+						</div>
+						<div className={`${styles.normalFlex}`}>
+							<div className="relative mr-[15px]">
+								{isAuthenticated ? (
+									<Link to="/profile">
+										<img
+											src={`${backend_url}${user.avatar}`}
+											alt="profile"
+											className="w-[35px] h-[35px] rounded-full"
+										/>
+									</Link>
+								) : (
+									<Link to="/login">
+										<CgProfile
+											size={30}
+											color="rgb(255 255 255/ 83%)"
+										/>
+									</Link>
+								)}
+							</div>
+						</div>
+						{/* Open Cart */}
+						{openCart ? <Cart setOpenCart={setOpenCart} /> : null}
 					</div>
 				</div>
 			</div>

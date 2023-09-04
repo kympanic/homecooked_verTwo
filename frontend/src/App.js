@@ -8,10 +8,10 @@ import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
 import { getAllProducts } from "./redux/actions/product";
 import { useSelector } from "react-redux";
-import AnimatedRoutes from "./components/AnimatedRoutes";
+import AnimatedRoutes from "./AnimatedRoutes";
 
 function App() {
-	const { loading } = useSelector((state) => state.user);
+	const { loading, isAuthenticated } = useSelector((state) => state.user);
 
 	useEffect(() => {
 		Store.dispatch(loadUser());
@@ -21,7 +21,7 @@ function App() {
 		<>
 			{loading ? null : (
 				<BrowserRouter>
-					<AnimatedRoutes />
+					<AnimatedRoutes isAuthenticated={isAuthenticated} />
 					<ToastContainer
 						position="bottom-center"
 						autoClose={5000}

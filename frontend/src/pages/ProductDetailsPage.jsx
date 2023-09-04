@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 import ProductDetails from "../components/Products/ProductDetails";
 import RecommendedProducts from "../components/Products/RecommendedProducts";
@@ -24,7 +23,6 @@ const ProductDetailsPage = () => {
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 		>
-			<Header />
 			<ProductDetails data={data} />
 			{data && <RecommendedProducts data={data} />}
 			<Footer />

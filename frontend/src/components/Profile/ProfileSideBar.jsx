@@ -9,6 +9,9 @@ import {
 } from "react-icons/ai";
 import { MdOutlineTrackChanges } from "react-icons/md";
 import { TbAddressBook } from "react-icons/tb";
+import axios from "axios";
+import { server } from "../../server";
+import { toast } from "react-toastify";
 
 const iconMapping = {
 	RxPerson,
@@ -37,6 +40,17 @@ const ProfileSideBar = ({ active, setActive }) => {
 	const handleClick = (section, index) => {
 		if (section.title === "Inbox") {
 			navigate("/inbox");
+		} else if (section.title === "Log Out") {
+			axios
+				.get(`${server}/user/logout`, { withCredentials: true })
+				.then((res) => {
+					toast.success(res.data.message);
+					window.location.reload(true);
+					navigate("/login");
+				})
+				.catch((error) => {
+					console.log(error.response.data.message);
+				});
 		} else {
 			setActive(index);
 		}
@@ -60,7 +74,7 @@ const ProfileSideBar = ({ active, setActive }) => {
 							<span
 								className={`pl-3 ${
 									active === index ? "text-[red]" : ""
-								}`}
+								} 800px:block hidden`}
 							>
 								{section.title}
 							</span>

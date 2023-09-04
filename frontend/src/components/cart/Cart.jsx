@@ -52,7 +52,10 @@ const Cart = ({ setOpenCart }) => {
 				<div className="px-5 mb-3">
 					{/* Checkout button */}
 					<Link to="/checkout">
-						<div className="h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px] ">
+						<div
+							className="h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]"
+							onClick={() => setOpenCart(false)}
+						>
 							<h1 className="text-[#fff] text-[18px] font-[600]">
 								Checkout ($1080)
 							</h1>

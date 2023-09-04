@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Footer from "../components/Layout/Footer";
-import Header from "../components/Layout/Header";
 import styles from "../styles/styles";
 import { faqData } from "../static/data";
 import { motion } from "framer-motion";
@@ -12,7 +11,6 @@ const FaqPage = () => {
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 		>
-			<Header activeHeading={5} />
 			<Faq />
 			<Footer />
 		</motion.div>
