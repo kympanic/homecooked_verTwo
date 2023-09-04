@@ -1,18 +1,20 @@
 import { useState } from "react";
-import styles from "../styles/styles";
+import styles from "../../styles/styles";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import axios from "axios";
-import { server } from "../server";
+import { server } from "../../server";
 import { toast } from "react-toastify";
 
-const Signup = () => {
+const ShopCreate = () => {
 	const [email, setEmail] = useState("");
 	const [name, setName] = useState("");
 	const [phone, setPhone] = useState("");
-	const [password, setPassword] = useState("");
+	const [address, setAddress] = useState("");
+	const [zipCode, setZipCode] = useState();
 	const [avatar, setAvatar] = useState(null);
+	const [password, setPassword] = useState("");
 	const [visible, setVisible] = useState(false);
 	const navigate = useNavigate();
 
@@ -50,10 +52,10 @@ const Signup = () => {
 		<div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 			<div className="sm:mx-auto sm:w-full sm:max-w-md">
 				<h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-					Register a new account
+					Register your Shop
 				</h2>
 			</div>
-			<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+			<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[35rem]">
 				<div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 					<form className="space-y-6" onSubmit={handleSubmit}>
 						<div>
@@ -61,16 +63,16 @@ const Signup = () => {
 								htmlFor="name"
 								className="block text-sm font-medium text-gray-700"
 							>
-								Full Name
+								Shop Name
 							</label>
 							<div className="mt-1">
 								<input
-									type="text"
-									name="text"
+									type="name"
+									name="name"
 									autoComplete="name"
 									required
 									value={name}
-									placeholder="John Doe"
+									placeholder="Shop Name"
 									onChange={(e) => setName(e.target.value)}
 									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 								/>
@@ -118,6 +120,44 @@ const Signup = () => {
 											event.preventDefault();
 										}
 									}}
+									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+								/>
+							</div>
+						</div>
+						<div>
+							<label
+								htmlFor="address"
+								className="block text-sm font-medium text-gray-700"
+							>
+								Address
+							</label>
+							<div className="mt-1">
+								<input
+									type="address"
+									name="address"
+									required
+									value={address}
+									placeholder="1234 Chocolate Way, Delicious Park CA"
+									onChange={(e) => setAddress(e.target.value)}
+									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+								/>
+							</div>
+						</div>
+						<div>
+							<label
+								htmlFor="zipcode"
+								className="block text-sm font-medium text-gray-700"
+							>
+								Zipcode
+							</label>
+							<div className="mt-1">
+								<input
+									type="number"
+									name="zipcode"
+									required
+									value={zipCode}
+									placeholder="12345"
+									onChange={(e) => setZipCode(e.target.value)}
 									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 								/>
 							</div>
@@ -201,7 +241,7 @@ const Signup = () => {
 						<div className={`${styles.normalFlex} w-full`}>
 							<h4>Already have an account?</h4>
 							<Link
-								to="/login"
+								to="/shop-login"
 								className="text-blue-600 hover:text-blue-500 pl-2"
 							>
 								Sign in
@@ -214,4 +254,4 @@ const Signup = () => {
 	);
 };
 
-export default Signup;
+export default ShopCreate;

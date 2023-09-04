@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Signup } from "../components";
+import Signup from "../components/Auth/Signup";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
