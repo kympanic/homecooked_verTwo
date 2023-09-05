@@ -1,16 +1,13 @@
 import React from "react";
 import EventCard from "../components/Events/EventCard";
-import { motion } from "framer-motion";
+import Header from "../components/Layout/Header";
 const EventsPage = () => {
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-		>
+		<div>
+			<Header />
 			<EventCard active={true} />
 			<EventCard active={true} />
-		</motion.div>
+		</div>
 	);
 };
 

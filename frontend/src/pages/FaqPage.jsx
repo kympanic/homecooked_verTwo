@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import Footer from "../components/Layout/Footer";
 import styles from "../styles/styles";
 import { faqData } from "../static/data";
-import { motion } from "framer-motion";
+import Header from "../components/Layout/Header";
 
 const FaqPage = () => {
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-		>
+		<div>
+			<Header />
 			<Faq />
 			<Footer />
-		</motion.div>
+		</div>
 	);
 };
 

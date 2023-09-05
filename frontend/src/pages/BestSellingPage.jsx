@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/styles";
 import { productData } from "../static/data";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
-import { motion } from "framer-motion";
+import Header from "../components/Layout/Header";
 
 const BestSellingPage = () => {
 	const [data, setData] = useState([]);
@@ -14,11 +14,8 @@ const BestSellingPage = () => {
 		setData(d);
 	}, []);
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-		>
+		<div>
+			<Header />
 			<br />
 			<br />
 			<div className={`${styles.section}`}>
@@ -29,7 +26,7 @@ const BestSellingPage = () => {
 						))}
 				</div>
 			</div>
-		</motion.div>
+		</div>
 	);
 };
 

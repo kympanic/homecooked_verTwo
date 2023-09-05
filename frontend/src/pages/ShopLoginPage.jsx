@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import ShopCreate from "../components/Shop/ShopCreate";
-import { useNavigate } from "react-router-dom";
+import ShopLogin from "../components/Auth/ShopLogin";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const ShopCreatePage = () => {
+const ShopLoginPage = () => {
 	const { isSeller, seller } = useSelector((state) => state.shop);
-	console.log(isSeller, "hello this should be true?");
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (isSeller === true) {
@@ -14,9 +13,9 @@ const ShopCreatePage = () => {
 	}, []);
 	return (
 		<div>
-			<ShopCreate />
+			<ShopLogin />
 		</div>
 	);
 };
 
-export default ShopCreatePage;
+export default ShopLoginPage;

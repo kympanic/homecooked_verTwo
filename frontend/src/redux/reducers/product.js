@@ -12,7 +12,6 @@ export const productReducer = createReducer(initialState, {
 		state.isLoading = true;
 	},
 	getAllProductsSuccess: (state, action) => {
-		console.log("Payload: ", action.payload); // Debug line
 		state.isLoading = false;
 		state.allProducts = action.payload;
 	},

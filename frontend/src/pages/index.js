@@ -1,6 +1,8 @@
 import LoginPage from "./LoginPage";
+import ShopLoginPage from "./ShopLoginPage";
 import SignupPage from "./SignupPage";
 import ActivationPage from "./ActivationPage";
+import SellerActivationPage from "./SellerActivationPage";
 import HomePage from "./HomePage";
 import ProductsPage from "./ProductsPage";
 import BestSellingPage from "./BestSellingPage.jsx";
@@ -10,11 +12,13 @@ import ProductDetailsPage from "./ProductDetailsPage";
 import ProfilePage from "./ProfilePage";
 import CheckoutPage from "./CheckoutPage";
 import ShopCreatePage from "./ShopCreatePage";
+import ShopHomePage from "./ShopHomePage";
 
 export {
 	LoginPage,
 	SignupPage,
 	ActivationPage,
+	SellerActivationPage,
 	HomePage,
 	ProductsPage,
 	EventsPage,
@@ -24,4 +28,6 @@ export {
 	ProfilePage,
 	CheckoutPage,
 	ShopCreatePage,
+	ShopLoginPage,
+	ShopHomePage,
 };

@@ -30,7 +30,7 @@ const shop = require("./controller/shop");
 
 app.use("/api/v2/user", user);
 app.use("/api/v2/product", product);
-app.use("/api/v2/shop", product);
+app.use("/api/v2/shop", shop);
 
 //error handling
 app.use(ErrorHandler);

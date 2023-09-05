@@ -13,21 +13,20 @@ import {
 	ProfilePage,
 	CheckoutPage,
 	ShopCreatePage,
+	SellerActivationPage,
+	ShopLoginPage,
+	ShopHomePage,
 } from "./pages";
 import { AnimatePresence } from "framer-motion";
 import Header from "./components/Layout/Header";
-import ProtectedRoute from "./ProtectedRoute";
-
+import { ProtectedRoute, SellerProtectedRoute } from "./ProtectedRoute";
 const AnimatedRoutes = ({ isAuthenticated }) => {
 	//We can only use useLocation in components that are inside of the Router Wrap.
 	const location = useLocation();
 	const currentPath = location.pathname;
 
 	return (
-		<>
-			{currentPath !== "/login" && currentPath !== "/sign-up" && (
-				<Header currentPath={currentPath} />
-			)}
+		
 			<AnimatePresence>
 				<Routes location={location} key={currentPath}>
 					<Route path="/" element={<HomePage />} />
@@ -36,6 +35,10 @@ const AnimatedRoutes = ({ isAuthenticated }) => {
 					<Route
 						path="/activation/:activation_token"
 						element={<ActivationPage />}
+					/>
+					<Route
+						path="/seller/activation/:activation_token"
+						element={<SellerActivationPage />}
 					/>
 					<Route path="/products" element={<ProductsPage />} />
 					<Route
@@ -61,7 +64,17 @@ const AnimatedRoutes = ({ isAuthenticated }) => {
 							</ProtectedRoute>
 						}
 					/>
+					{/* Shop Routes */}
 					<Route path="/shop-create" element={<ShopCreatePage />} />
+					<Route path="/shop-login" element={<ShopLoginPage />} />
+					<Route
+						path="/shop/:id"
+						element={
+							<SellerProtectedRoute>
+								<ShopHomePage />
+							</SellerProtectedRoute>
+						}
+					/>
 				</Routes>
 			</AnimatePresence>
 		</>

@@ -3,7 +3,7 @@ import styles from "../styles/styles";
 import { useSearchParams } from "react-router-dom";
 import { productData } from "../static/data";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
-import { motion } from "framer-motion";
+import Header from "../components/Layout/Header";
 
 const ProductsPage = () => {
 	const [searchParams] = useSearchParams();
@@ -24,11 +24,8 @@ const ProductsPage = () => {
 		}
 	});
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-		>
+		<div>
+			<Header />
 			<br />
 			<br />
 			<div className={`${styles.section}`}>
@@ -44,7 +41,7 @@ const ProductsPage = () => {
 					</h1>
 				) : null}
 			</div>
-		</motion.div>
+		</div>
 	);
 };
 

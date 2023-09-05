@@ -8,7 +8,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const sendMail = require("../utils/sendMail");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
-const sendToken = require("../utils/jwtToken");
+const { sendToken } = require("../utils/jwtToken");
 const { isAuthenticated } = require("../middleware/auth");
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {

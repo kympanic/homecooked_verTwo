@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const shopSchema = new mongoose.Schema({
 	name: {
@@ -25,7 +27,7 @@ const shopSchema = new mongoose.Schema({
 	},
 	role: {
 		type: String,
-		default: "seller",
+		default: "Seller",
 	},
 	avatar: {
 		type: String,
