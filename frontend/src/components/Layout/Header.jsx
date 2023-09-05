@@ -17,7 +17,7 @@ import { backend_url } from "../../server";
 import Cart from "../Cart/Cart";
 import Favorites from "../Favorites/Favorites";
 
-const Header = ({ currentPath }) => {
+const Header = ({ activeHeading }) => {
 	const { isAuthenticated, user } = useSelector((state) => state.user);
 	const { allProducts } = useSelector((state) => state.products);
 	const [searchTerm, setSearchTerm] = useState("");
@@ -146,7 +146,7 @@ const Header = ({ currentPath }) => {
 					</div>
 					{/* navitems */}
 					<div className={`${styles.normalFlex}`}>
-						<Navbar active={currentPath} />
+						<Navbar active={activeHeading} />
 					</div>
 					<div className="flex">
 						<div className={`${styles.normalFlex}`}>

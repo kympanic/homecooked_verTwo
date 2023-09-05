@@ -12,9 +12,9 @@ const Navbar = ({ active }) => {
 						<Link
 							to={i.url}
 							className={`${
-								i.url === active
-									? "text-[#372b94]"
-									: "text-[#fff]"
+								active === index + 1
+									? "text-[#2e2e8a]"
+									: "text-black 800px:text-[#fff]"
 							} font-[500] px-6 cursor-pointer`}
 						>
 							{i.title}

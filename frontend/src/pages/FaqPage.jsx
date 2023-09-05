@@ -7,7 +7,7 @@ import Header from "../components/Layout/Header";
 const FaqPage = () => {
 	return (
 		<div>
-			<Header />
+			<Header activeHeading={5} />
 			<Faq />
 			<Footer />
 		</div>

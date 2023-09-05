@@ -15,7 +15,7 @@ const BestSellingPage = () => {
 	}, []);
 	return (
 		<div>
-			<Header />
+			<Header activeHeading={2} />
 			<br />
 			<br />
 			<div className={`${styles.section}`}>

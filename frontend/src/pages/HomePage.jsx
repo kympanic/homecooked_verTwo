@@ -11,7 +11,7 @@ import Header from "../components/Layout/Header";
 const HomePage = () => {
 	return (
 		<div>
-			<Header />
+			<Header activeHeading={1} />
 			<Hero />
 			<Categories />
 			<BestDeals />
