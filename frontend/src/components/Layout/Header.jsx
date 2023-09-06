@@ -26,6 +26,7 @@ const Header = ({ activeHeading }) => {
 	const [dropDown, setDropDown] = useState(false);
 	const [openCart, setOpenCart] = useState(false);
 	const [openFavorites, setOpenFavorites] = useState(false);
+	const { isSeller, seller } = useSelector((state) => state?.shop);
 
 	const handleSearchChange = (e) => {
 		const term = e.target.value;
@@ -99,14 +100,25 @@ const Header = ({ activeHeading }) => {
 							</div>
 						) : null}
 					</div>
-					<div className={`${styles.button}`}>
-						<Link to="/shop-create">
-							<h1 className="text-[#fff] flex items-center">
-								Become Seller
-								<IoIosArrowForward className="ml-1" />
-							</h1>
-						</Link>
-					</div>
+					{isSeller ? (
+						<div className={`${styles.button}`}>
+							<Link to={`/shop/${seller._id}`}>
+								<h1 className="text-[#fff] flex items-center">
+									Your Store
+									<IoIosArrowForward className="ml-1" />
+								</h1>
+							</Link>
+						</div>
+					) : (
+						<div className={`${styles.button}`}>
+							<Link to="/shop-create">
+								<h1 className="text-[#fff] flex items-center">
+									Become Seller
+									<IoIosArrowForward className="ml-1" />
+								</h1>
+							</Link>
+						</div>
+					)}
 				</div>
 			</div>
 			<div

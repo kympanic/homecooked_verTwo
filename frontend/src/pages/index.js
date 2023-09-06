@@ -13,6 +13,7 @@ import ProfilePage from "./ProfilePage";
 import CheckoutPage from "./CheckoutPage";
 import ShopCreatePage from "./ShopCreatePage";
 import ShopHomePage from "./ShopHomePage";
+import ShopDashboardPage from "./ShopDashboardPage";
 
 export {
 	LoginPage,
@@ -30,4 +31,5 @@ export {
 	ShopCreatePage,
 	ShopLoginPage,
 	ShopHomePage,
+	ShopDashboardPage,
 };

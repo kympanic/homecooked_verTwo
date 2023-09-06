@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import ShopCreate from "../components/Shop/ShopCreate";
+import ShopCreate from "../components/Auth/ShopCreate";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ShopCreatePage = () => {
 	const { isSeller, seller } = useSelector((state) => state.shop);
-	console.log(isSeller, "hello this should be true?");
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (isSeller === true) {

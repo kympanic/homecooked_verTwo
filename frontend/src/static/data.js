@@ -252,7 +252,6 @@ export const productData = [
 			ratings: 4.2,
 		},
 		price: 1099,
-		discount_price: 1049,
 		rating: 4,
 		total_sell: 35,
 		stock: 10,
@@ -281,7 +280,7 @@ export const productData = [
 			},
 			ratings: 4.2,
 		},
-		discount_price: 1099,
+		price: 1099,
 		rating: 5,
 		total_sell: 80,
 		stock: 10,
@@ -311,7 +310,7 @@ export const productData = [
 			ratings: 4.2,
 		},
 		price: 1099,
-		discount_price: 1049,
+
 		rating: 4,
 		total_sell: 75,
 		stock: 10,
@@ -342,7 +341,7 @@ export const productData = [
 			category: "Others",
 		},
 		price: 100,
-		discount_price: 79,
+
 		rating: 4,
 		total_sell: 12,
 		stock: 10,
@@ -372,7 +371,7 @@ export const productData = [
 			ratings: 4.2,
 		},
 		price: 120,
-		discount_price: 89,
+
 		rating: 5,
 		total_sell: 49,
 		stock: 10,
@@ -401,7 +400,7 @@ export const productData = [
 			ratings: 4.2,
 		},
 		price: 300,
-		discount_price: 239,
+
 		rating: 4.5,
 		reviews: [
 			{
@@ -440,7 +439,6 @@ export const productData = [
 			ratings: 4.2,
 		},
 		price: 100,
-		discount_price: 79,
 		rating: 4,
 		total_sell: 62,
 		stock: 10,
@@ -469,7 +467,6 @@ export const productData = [
 			ratings: 4.2,
 		},
 		price: 300,
-		discount_price: 239,
 		rating: 4.5,
 		reviews: [
 			{
@@ -507,7 +504,7 @@ export const productData = [
 			},
 			ratings: 4.2,
 		},
-		discount_price: 1099,
+		price: 1099,
 		rating: 5,
 		total_sell: 20,
 		stock: 10,
@@ -537,7 +534,6 @@ export const productData = [
 			ratings: 4.2,
 		},
 		price: 300,
-		discount_price: 239,
 		rating: 4.5,
 		reviews: [
 			{
