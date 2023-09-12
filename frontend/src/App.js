@@ -5,7 +5,7 @@ import "./App.css";
 import { useEffect } from "react";
 import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
-import { getAllProducts } from "./redux/actions/product";
+// import { getAllProducts } from "./redux/actions/product";
 import { loadShop } from "./redux/actions/shop";
 import {
 	ActivationPage,
@@ -32,7 +32,7 @@ function App() {
 	useEffect(() => {
 		Store.dispatch(loadUser());
 		Store.dispatch(loadShop());
-		Store.dispatch(getAllProducts());
+		// Store.dispatch(getAllProducts());
 	}, []);
 
 	return (

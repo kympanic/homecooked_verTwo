@@ -23,13 +23,49 @@ export const categoriesData = [
 
 	{
 		id: 4,
-		title: "Vegetarian",
+		title: "Mediterranean",
 		subTitle: "",
 		image_Url:
 			"https://soundcloud-clone-kpop-seeders.s3.us-west-2.amazonaws.com/images/Vegetarian.jpg",
 	},
 	{
 		id: 5,
+		title: "Vegetarian",
+		subTitle: "",
+		image_Url:
+			"https://soundcloud-clone-kpop-seeders.s3.us-west-2.amazonaws.com/images/Vegetarian.jpg",
+	},
+	{
+		id: 6,
+		title: "Dessert",
+		subTitle: "",
+		image_Url:
+			"https://soundcloud-clone-kpop-seeders.s3.us-west-2.amazonaws.com/images/Vegetarian.jpg",
+	},
+	{
+		id: 7,
+		title: "Indian",
+		subTitle: "",
+		image_Url:
+			"https://soundcloud-clone-kpop-seeders.s3.us-west-2.amazonaws.com/images/Vegetarian.jpg",
+	},
+	{
+		id: 8,
+		title: "Mexican",
+		subTitle: "",
+		image_Url:
+			"https://soundcloud-clone-kpop-seeders.s3.us-west-2.amazonaws.com/images/Vegetarian.jpg",
+	},
+	{
+		id: 9,
+		title: "Fusion",
+		subTitle: "",
+		image_Url:
+			"https://soundcloud-clone-kpop-seeders.s3.us-west-2.amazonaws.com/images/Vegetarian.jpg",
+	},
+
+	{
+		id: 10,
 		title: "Other",
 		subTitle: "",
 		image_Url:

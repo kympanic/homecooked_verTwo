@@ -19,7 +19,7 @@ import Favorites from "../Favorites/Favorites";
 
 const Header = ({ activeHeading }) => {
 	const { isAuthenticated, user } = useSelector((state) => state.user);
-	const { allProducts } = useSelector((state) => state.products);
+	// const { allProducts } = useSelector((state) => state.products);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [searchData, setSearchData] = useState(null);
 	const [active, setActive] = useState(false);
@@ -37,13 +37,13 @@ const Header = ({ activeHeading }) => {
 			return;
 		}
 
-		const filteredProducts =
-			allProducts &&
-			allProducts.filter((product) =>
-				product.name.toLowerCase().includes(term.toLowerCase())
-			);
+		// const filteredProducts =
+		// 	allProducts &&
+		// 	allProducts.filter((product) =>
+		// 		product.name.toLowerCase().includes(term.toLowerCase())
+		// 	);
 
-		setSearchData(filteredProducts);
+		// setSearchData(filteredProducts);
 	};
 
 	window.addEventListener("scroll", () => {

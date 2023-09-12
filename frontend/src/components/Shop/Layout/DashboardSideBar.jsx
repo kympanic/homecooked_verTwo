@@ -7,11 +7,14 @@ import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { HiOutlineReceiptRefund } from "react-icons/hi";
 
-const DashboardSideBar = ({ active }) => {
+const DashboardSideBar = ({ active, setActive }) => {
 	return (
-		<div className="w-full h-[90vh] bg-white shadow-sm overflow-y-scroll sticky top-0 left-0 z-10 ">
+		<div className="w-full h-[90vh] bg-white shadow-sm overflow-y-auto sticky top-0 left-0 z-10 ">
 			<div className="w-full flex items-center p-4 pt-6">
-				<Link to="/dashboard" className="w-full flex items-center pt-5">
+				<div
+					className="w-full flex items-center pt-5 cursor-pointer"
+					onClick={() => setActive(1)}
+				>
 					<RxDashboard
 						size={30}
 						color={`${active === 1 ? "crimson" : "#555"}`}
@@ -23,12 +26,12 @@ const DashboardSideBar = ({ active }) => {
 					>
 						Dashboard
 					</h5>
-				</Link>
+				</div>
 			</div>
 			<div className="w-full flex items-center p-4">
-				<Link
-					to="/dashboard-orders"
-					className="w-full flex items-center pt-6"
+				<div
+					className="w-full flex items-center pt-6 cursor-pointer"
+					onClick={() => setActive(2)}
 				>
 					<FiShoppingBag
 						size={30}
@@ -41,12 +44,12 @@ const DashboardSideBar = ({ active }) => {
 					>
 						All Orders
 					</h5>
-				</Link>
+				</div>
 			</div>
 			<div className="w-full flex items-center p-4">
-				<Link
-					to="/dashboard-products"
-					className="w-full flex items-center pt-6"
+				<div
+					className="w-full flex items-center pt-6 cursor-pointer"
+					onClick={() => setActive(3)}
 				>
 					<FiPackage
 						size={30}
@@ -59,12 +62,12 @@ const DashboardSideBar = ({ active }) => {
 					>
 						All Meals
 					</h5>
-				</Link>
+				</div>
 			</div>
 			<div className="w-full flex items-center p-4">
-				<Link
-					to="/dashboard-create-product"
-					className="w-full flex items-center pt-6"
+				<div
+					className="w-full flex items-center pt-6 cursor-pointer"
+					onClick={() => setActive(4)}
 				>
 					<AiOutlineFolderAdd
 						size={30}
@@ -77,13 +80,13 @@ const DashboardSideBar = ({ active }) => {
 					>
 						Create Meal
 					</h5>
-				</Link>
+				</div>
 			</div>
 
 			<div className="w-full flex items-center p-4">
-				<Link
-					to="/dashboard-messages"
-					className="w-full flex items-center pt-6"
+				<div
+					className="w-full flex items-center pt-6 cursor-pointer"
+					onClick={() => setActive(5)}
 				>
 					<BiMessageSquareDetail
 						size={30}
@@ -96,12 +99,12 @@ const DashboardSideBar = ({ active }) => {
 					>
 						Shop Inbox
 					</h5>
-				</Link>
+				</div>
 			</div>
 			<div className="w-full flex items-center p-4">
-				<Link
-					to="/dashboard-coupons"
-					className="w-full flex items-center pt-6"
+				<div
+					className="w-full flex items-center pt-6 cursor-pointer"
+					onClick={() => setActive(6)}
 				>
 					<AiOutlineGift
 						size={30}
@@ -114,12 +117,12 @@ const DashboardSideBar = ({ active }) => {
 					>
 						Discount Codes
 					</h5>
-				</Link>
+				</div>
 			</div>
 			<div className="w-full flex items-center p-4">
-				<Link
-					to="/dashboard-refunds"
-					className="w-full flex items-center pt-6"
+				<div
+					className="w-full flex items-center pt-6 cursor-pointer"
+					onClick={() => setActive(7)}
 				>
 					<HiOutlineReceiptRefund
 						size={30}
@@ -132,12 +135,12 @@ const DashboardSideBar = ({ active }) => {
 					>
 						Refunds
 					</h5>
-				</Link>
+				</div>
 			</div>
 			<div className="w-full flex items-center p-4">
-				<Link
-					to="/dashboard-withdraw-money"
-					className="w-full flex items-center pt-6"
+				<div
+					className="w-full flex items-center pt-6 cursor-pointer"
+					onClick={() => setActive(8)}
 				>
 					<CiMoneyBill
 						size={30}
@@ -150,10 +153,13 @@ const DashboardSideBar = ({ active }) => {
 					>
 						Withdraw Money
 					</h5>
-				</Link>
+				</div>
 			</div>
 			<div className="w-full flex items-center p-4">
-				<Link to="/settings" className="w-full flex items-center pt-6">
+				<div
+					className="w-full flex items-center pt-6 cursor-pointer"
+					onClick={() => setActive(9)}
+				>
 					<CiSettings
 						size={30}
 						color={`${active === 9 ? "crimson" : "#555"}`}
@@ -165,7 +171,7 @@ const DashboardSideBar = ({ active }) => {
 					>
 						Settings
 					</h5>
-				</Link>
+				</div>
 			</div>
 		</div>
 	);

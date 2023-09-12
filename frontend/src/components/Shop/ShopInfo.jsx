@@ -1,12 +1,27 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { backend_url } from "../../server";
+import { backend_url, server } from "../../server";
 import styles from "../../styles/styles";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const ShopInfo = ({ isOwner }) => {
-	const { seller } = useSelector((state) => state.shop);
+	const { seller } = useSelector((state) => state?.shop);
+	const navigate = useNavigate();
 
-	const handleLogout = () => {};
+	const handleLogout = () => {
+		axios
+			.get(`${server}/shop/logout`, { withCredentials: true })
+			.then((res) => {
+				toast.success(res.data.message);
+				window.location.reload(true);
+				navigate("/");
+			})
+			.catch((error) => {
+				console.log(error.response.data.message);
+			});
+	};
 	return (
 		<>
 			<div className="w-full py-5">
