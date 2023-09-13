@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { productData } from "../../static/data";
 import ProductCard from "../Route/ProductCard/ProductCard";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styles from "../../styles/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsShop } from "../../redux/actions/product";
@@ -9,13 +9,13 @@ import Loader from "../Layout/Loader";
 
 const ShopProfileData = ({ isOwner }) => {
 	const [active, setActive] = useState(1);
-	const { products, isLoading } = useSelector((state) => state?.products);
-	// const { seller } = useSelector((state) => state.shop);
+	const { products } = useSelector((state) => state?.products);
+	const { id } = useParams();
 	const dispatch = useDispatch();
 
-	// useEffect(() => {
-	// 	dispatch(getAllProductsShop(seller._id));
-	// }, [dispatch]);
+	useEffect(() => {
+		dispatch(getAllProductsShop(id));
+	}, [dispatch, id]);
 
 	return (
 		<div className="w-full">
@@ -58,7 +58,6 @@ const ShopProfileData = ({ isOwner }) => {
 					</div>
 				)}
 			</div>
-			<br />
 			<div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] xl:grid-cols-4 xl:gap-[20px] mb-12 border-0">
 				{products &&
 					active === 1 &&

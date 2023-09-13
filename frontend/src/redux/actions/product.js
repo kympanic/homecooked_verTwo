@@ -1,19 +1,16 @@
 import axios from "axios";
 import { server } from "../../server";
 
-//load ALL products
-
 export const getAllProducts = () => async (dispatch) => {
 	try {
 		dispatch({
 			type: "getAllProductsRequest",
 		});
-		const { data } = await axios.get(`${server}/product/all-products`, {
-			// withCredentials: true,
-		});
+
+		const { data } = await axios.get(`${server}/product/all-products`);
 		dispatch({
 			type: "getAllProductsSuccess",
-			payload: data.allProducts,
+			payload: data.products,
 		});
 	} catch (error) {
 		dispatch({
@@ -22,8 +19,7 @@ export const getAllProducts = () => async (dispatch) => {
 		});
 	}
 };
-
-//get all products form shop
+//get all products from shop
 export const getAllProductsShop = (id) => async (dispatch) => {
 	try {
 		dispatch({

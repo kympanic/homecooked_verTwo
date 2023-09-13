@@ -27,12 +27,13 @@ import {
 } from "./pages";
 import UserProtectedRoute from "./protectedRoutes/UserProtectedRoute";
 import SellerProtectedRoute from "./protectedRoutes/SellerProtectedRoute";
+import { getAllProducts } from "./redux/actions/product";
 
 function App() {
 	useEffect(() => {
 		Store.dispatch(loadUser());
 		Store.dispatch(loadShop());
-		// Store.dispatch(getAllProducts());
+		Store.dispatch(getAllProducts());
 	}, []);
 
 	return (
@@ -73,14 +74,7 @@ function App() {
 				{/* Shop Routes */}
 				<Route path="/shop-create" element={<ShopCreatePage />} />
 				<Route path="/shop-login" element={<ShopLoginPage />} />
-				<Route
-					path="/shop/:id"
-					element={
-						<SellerProtectedRoute>
-							<ShopHomePage />
-						</SellerProtectedRoute>
-					}
-				/>
+				<Route path="/shop/:id" element={<ShopHomePage />} />
 				<Route
 					path="/dashboard"
 					element={

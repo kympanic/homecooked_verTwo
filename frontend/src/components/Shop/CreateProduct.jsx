@@ -97,11 +97,12 @@ const CreateProduct = () => {
 								required
 								name="description"
 								value={description}
+								maxLength="1200"
 								className="mt-2 appearance-none block w-full
 								px-3 h-[300px] border border-gray-300
 								rounded-[3px] placeholder-gray-400
 								focus:outline-none focus:ring-blue-500
-								focus:border-blue-500 sm:text-sm resize-none"
+								focus:border-blue-500 sm:text-sm resize-none pb-4"
 								onChange={(e) => setDescription(e.target.value)}
 								placeholder="Ingredients,taste, preparation, etc..."
 							>

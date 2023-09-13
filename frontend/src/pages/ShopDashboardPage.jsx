@@ -14,7 +14,7 @@ const ShopDashboardPage = () => {
 		<div>
 			<DashboardHeader />
 			<div className="flex items-center justify-between w-full">
-				<div className="w-[88px] 800px:w-[15%]">
+				<div className="w-[88px] 800px:w-[20%]">
 					<DashboardSideBar active={active} setActive={setActive} />
 				</div>
 				{active === 3 && (

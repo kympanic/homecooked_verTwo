@@ -7,11 +7,14 @@ import {
 	AiOutlineMessage,
 	AiOutlineShoppingCart,
 } from "react-icons/ai";
-
+import { backend_url } from "../../../server";
+import { Link } from "react-router-dom";
 const ProductDetailsCard = ({ setOpen, data }) => {
 	const [count, setCount] = useState(1);
 	const [click, setClick] = useState(false);
+
 	// const [select, setSelect] = useState(false);
+	console.log(data, "this is the data");
 
 	const handleMessageSubmit = () => {};
 	const decrementCount = () => {
@@ -34,17 +37,24 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 						/>
 						<div className="block w-full 800px:flex">
 							<div className="w-full 800px:w-[50%]">
-								<img src={data.image_Url[0].url} alt="" />
+								<img
+									src={`${backend_url}${data?.images?.[0]}`}
+									alt=""
+								/>
 								<div className="flex">
 									<img
-										src={data.shop.shop_avatar.url}
-										alt=""
+										src={`${backend_url}${data.shop.avatar}`}
+										alt={data.name}
 										className="w-[50px] h-[50px] rounded-full mr-2"
 									/>
 									<div>
-										<h3 className={`${styles.shop_name}`}>
-											{data.shop.name}
-										</h3>
+										<Link to={`/shop/${data?.shop._id}`}>
+											<h5
+												className={`${styles.shop_name}`}
+											>
+												{data.shop.name}
+											</h5>
+										</Link>
 										<h5 className="pb-3 text-[15px]">
 											({data.shop.ratings}) Ratings
 										</h5>
@@ -71,13 +81,8 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 								</h1>
 								<p>{data.description}</p>
 								<div className="flex pt-3">
-									<h4
-										className={`${styles.productDiscountPrice}`}
-									>
-										${data.discount_price}
-									</h4>
-									<h3 className={`${styles.price}`}>
-										{data.price ? data.price + "$" : null}
+									<h3 className={`${styles.discount_price}`}>
+										{data.price}
 									</h3>
 								</div>
 								<div className="flex items-center mt-12 justify-between pr-3">

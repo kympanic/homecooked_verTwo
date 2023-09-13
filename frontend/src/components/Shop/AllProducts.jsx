@@ -14,7 +14,7 @@ const AllProducts = () => {
 
 	useEffect(() => {
 		dispatch(getAllProductsShop(seller._id));
-	}, [dispatch]);
+	}, [dispatch, seller._id]);
 
 	const handleDelete = (id) => {
 		dispatch(deleteProduct(id));
@@ -26,7 +26,7 @@ const AllProducts = () => {
 		{ field: "name", headerName: "Name,", minWidth: 180, flex: 1.4 },
 		{ field: "price", headerName: "Price", minWidth: 100, flex: 0.6 },
 		{ field: "stock", headerName: "Stock", minWidth: 80, flex: 0.5 },
-		{ field: "soldout", headerName: "Sold Out", minWidth: 130, flex: 0.6 },
+		{ field: "sold", headerName: "Sold", minWidth: 130, flex: 0.6 },
 		{
 			field: "Preview",
 			headerName: "Preview",
@@ -79,7 +79,7 @@ const AllProducts = () => {
 				name: item.name,
 				price: "$ " + item.price,
 				stock: item.stock,
-				soldout: 10,
+				sold: item.sold_out,
 			});
 		});
 	return (

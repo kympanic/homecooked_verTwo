@@ -1,41 +1,53 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { backend_url, server } from "../../server";
 import styles from "../../styles/styles";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ShopInfo = ({ isOwner }) => {
-	const { seller } = useSelector((state) => state?.shop);
+	const [data, setData] = useState({});
+	const { id } = useParams();
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		axios
+			.get(`${server}/shop/get-shop-info/${id}`)
+			.then((res) => {
+				setData(res.data.shop);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
 
 	const handleLogout = () => {
 		axios
 			.get(`${server}/shop/logout`, { withCredentials: true })
 			.then((res) => {
 				toast.success(res.data.message);
-				window.location.reload(true);
 				navigate("/");
+				window.location.reload(true);
 			})
 			.catch((error) => {
 				console.log(error.response.data.message);
 			});
 	};
+
 	return (
 		<>
 			<div className="w-full py-5">
 				<div className="w-full flex item-center justify-center">
 					<img
-						src={`${backend_url}${seller?.avatar}`}
+						src={`${backend_url}${data?.avatar}`}
 						alt=""
 						className="w-[150px] h-[150px] object-cover rounded-full"
 					/>
 				</div>
-				<h3 className="text-center py-2 text-[20px]">{seller.name}</h3>
-				{seller?.description ? (
+				<h3 className="text-center py-2 text-[20px]">{data.name}</h3>
+				{data?.description ? (
 					<p className="text-[16px] text-[#000000a6] p-[10px] flex items-center">
-						{seller.description}
+						{data.description}
 					</p>
 				) : (
 					<p className="text-[16px] text-[#000000a6] p-[10px] flex items-center">
@@ -46,11 +58,11 @@ const ShopInfo = ({ isOwner }) => {
 			</div>
 			<div className="p-3">
 				<h5 className="font-[600]">Address</h5>
-				<h4 className="text-[#000000a6]">{seller.address}</h4>
+				<h4 className="text-[#000000a6]">{data.address}</h4>
 			</div>
 			<div className="p-3">
 				<h5 className="font-[600]">Phone Number</h5>
-				<h4 className="text-[#000000a6]">{seller.phoneNumber}</h4>
+				<h4 className="text-[#000000a6]">{data.phoneNumber}</h4>
 			</div>
 			<div className="p-3">
 				<h5 className="font-[600]">Total Products</h5>
@@ -63,7 +75,7 @@ const ShopInfo = ({ isOwner }) => {
 			<div className="p-3">
 				<h5 className="font-[600]">Joined On</h5>
 				<h4 className="text-[#000000a6]">
-					{seller.createdAt.slice(0, 10)}
+					{data?.createdAt?.slice(0, 10)}
 				</h4>
 			</div>
 			{isOwner && (
