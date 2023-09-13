@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-	user: {
-		type: mongoose.Schema.Types.ObjectId, // Reference to user ID
-		ref: "User",
-		required: true,
-	},
 	name: {
 		type: String,
 		required: [true, "Please enter product name!"],
@@ -14,13 +9,37 @@ const productSchema = new mongoose.Schema({
 		type: String,
 		required: [true, "Please enter product description!"],
 	},
-	image_url: {
-		type: String,
-		required: [true, "Please enter image URL for the product!"],
+	price: {
+		type: Number,
+		required: [true, "Please enter product price!"],
+	},
+	stock: {
+		type: Number,
+		required: [true, "Please enter your product stock"],
+	},
+	images: {
+		type: [
+			{
+				type: String,
+			},
+		],
+		required: [true, "Please upload product images!"],
 	},
 	category: {
 		type: String,
 		required: [true, "Please enter product category!"],
+	},
+	shopId: {
+		type: String,
+		required: true,
+	},
+	shop: {
+		type: Object,
+		required: true,
+	},
+	sold_out: {
+		type: Number,
+		default: 0,
 	},
 	createdAt: {
 		type: Date,
