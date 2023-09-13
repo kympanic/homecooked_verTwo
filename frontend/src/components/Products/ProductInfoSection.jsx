@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
+import { backend_url } from "../../server";
 
 const ProductInfoSection = ({ data }) => {
 	const [active, setActive] = useState(1);
@@ -87,7 +88,7 @@ const ProductInfoSection = ({ data }) => {
 					<div className="w-full 800px:w-[50%]">
 						<div className="flex items-center">
 							<img
-								src={data.shop.shop_avatar.url}
+								src={`${backend_url}${data.shop.avatar}`}
 								alt=""
 								className="w-[50px] h-[50px] rounded-full"
 							/>
@@ -96,7 +97,7 @@ const ProductInfoSection = ({ data }) => {
 									{data.shop.name}
 								</h3>
 								<h5 className="pb-2 text=[15px]">
-									({data.shop.ratings}) Ratings
+									(4.5) Ratings
 								</h5>
 							</div>
 						</div>
@@ -112,8 +113,8 @@ const ProductInfoSection = ({ data }) => {
 						<div className="text-left">
 							<h5 className="font-[600]">
 								Joined on:
-								<span className="font-[500]">
-									01 September, 2023
+								<span className="font-[500] ml-1">
+									{`${data.shop.createdAt.slice(0, 10)}`}
 								</span>
 							</h5>
 							<h5 className="font-[600]">

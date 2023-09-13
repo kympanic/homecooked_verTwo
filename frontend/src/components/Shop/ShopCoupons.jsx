@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getAllProductsShop } from "../../redux/actions/product";
-import { Link } from "react-router-dom";
+import { getAllProductsShop } from "../../redux/actions/product";
 import { Button } from "@mui/material";
-import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 import Loader from "../Layout/Loader";
 import { DataGrid } from "@mui/x-data-grid";
 import styles from "../../styles/styles";
@@ -36,10 +35,16 @@ const ShopCoupons = () => {
 			.catch((err) => {
 				console.log(err);
 			});
-	}, [dispatch]);
+	}, [dispatch, seller._id]);
 
-	const handleDelete = (id) => {
-		dispatch(deleteProduct(id));
+	const handleDelete = async (id) => {
+		await axios
+			.delete(`${server}/coupon/delete-coupon/${id}`, {
+				withCredentials: true,
+			})
+			.then((res) => {
+				toast.success("Coupon code deleted succesfully!");
+			});
 		window.location.reload();
 	};
 
@@ -65,7 +70,6 @@ const ShopCoupons = () => {
 				setMaxAmount("");
 				setSelectedProduct("");
 				setDiscount("");
-				console.log(res.data);
 				toast.success("Coupon code created successfully!");
 				setOpen(false);
 			})
@@ -85,7 +89,7 @@ const ShopCoupons = () => {
 		},
 		{
 			field: "delete",
-			headerName: "",
+			headerName: "Delete",
 			minWidth: 120,
 			flex: 0.8,
 			type: "number",
@@ -138,9 +142,10 @@ const ShopCoupons = () => {
 						pageSize={10}
 						disableRowSelectionOnClick
 						autoHeight
+						className="z-0"
 					/>
 					{open && (
-						<div className="fixed top-0 left-0 w-full h-screen bg-[#00000062] z-99 flex items-center justify-center">
+						<div className="fixed top-0 left-0 w-full h-screen bg-[#00000062] z-999 flex items-center justify-center">
 							<div className="w-[70%] 800px:ml-[200px] 800px:w-[45%] h-[80vh] bg-white rounded-md shadow p-4">
 								<div className="w-full flex justify-end cursor-pointer">
 									<RxCross1

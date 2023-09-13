@@ -13,11 +13,9 @@ router.get(
 	isSeller,
 	catchAsyncErrors(async (req, res, next) => {
 		try {
-			console.log(req.params.id);
 			const coupons = await Coupon.find({
 				"shop._id": req.params.id,
 			});
-			console.log(coupons, "this are the coupons");
 
 			res.status(201).json({
 				success: true,
@@ -70,6 +68,27 @@ router.post(
 			});
 		} catch (error) {
 			return next(new ErrorHandler(error.message, 400));
+		}
+	})
+);
+
+//delete product
+router.delete(
+	"/delete-coupon/:id",
+	isSeller,
+	catchAsyncErrors(async (req, res, next) => {
+		try {
+			const couponId = req.params.id;
+			const coupon = await Coupon.findByIdAndDelete(couponId);
+			if (!coupon) {
+				return next(new ErrorHandler("Coupon not found!", 500));
+			}
+			res.status(201).json({
+				success: true,
+				message: "Coupon deleted successfully!",
+			});
+		} catch (error) {
+			return next(new ErrorHandler(error, 400));
 		}
 	})
 );

@@ -50,7 +50,7 @@ const AllProducts = () => {
 		},
 		{
 			field: "delete",
-			headerName: "",
+			headerName: "Delete",
 			minWidth: 120,
 			flex: 0.8,
 			type: "number",
@@ -94,6 +94,7 @@ const AllProducts = () => {
 						pageSize={10}
 						disableRowSelectionOnClick
 						autoHeight
+						className="z-0"
 					/>
 				</div>
 			)}

@@ -5,18 +5,21 @@ import RecommendedProducts from "../components/Products/RecommendedProducts";
 import { useParams } from "react-router-dom";
 import { productData } from "../static/data";
 import Header from "../components/Layout/Header";
+import { useSelector } from "react-redux";
 
 const ProductDetailsPage = () => {
+	const { allProducts } = useSelector((state) => state.products);
 	const { name } = useParams();
 	const [data, setData] = useState(null);
 	const productName = name.replace(/-/g, " ");
 
-	console.log(name);
-
+	console.log(allProducts, "these are the products");
 	useEffect(() => {
-		const data = productData.find((i) => i.name === productName);
-		setData(data);
+		const product = allProducts?.find((i) => i.name === productName);
+		setData(product);
 	}, []);
+
+	console.log(data);
 	return (
 		<div>
 			<Header />

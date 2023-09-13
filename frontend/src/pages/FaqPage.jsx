@@ -32,7 +32,10 @@ const Faq = () => {
 				{/* single Faq */}
 				{faqData &&
 					faqData.map((i, index) => (
-						<div className="border-b border-gray-200 pb-4">
+						<div
+							className="border-b border-gray-200 pb-4"
+							key={index}
+						>
 							<button
 								className="flex items-center justify-between w-full"
 								onClick={() => toggleTab(i)}
