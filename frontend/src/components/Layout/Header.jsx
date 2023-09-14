@@ -19,7 +19,7 @@ import Favorites from "../Favorites/Favorites";
 
 const Header = ({ activeHeading }) => {
 	const { isAuthenticated, user } = useSelector((state) => state.user);
-	// const { allProducts } = useSelector((state) => state.products);
+	const { allProducts } = useSelector((state) => state.products);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [searchData, setSearchData] = useState(null);
 	const [active, setActive] = useState(false);
@@ -37,13 +37,13 @@ const Header = ({ activeHeading }) => {
 			return;
 		}
 
-		// const filteredProducts =
-		// 	allProducts &&
-		// 	allProducts.filter((product) =>
-		// 		product.name.toLowerCase().includes(term.toLowerCase())
-		// 	);
+		const filteredProducts =
+			allProducts &&
+			allProducts.filter((product) =>
+				product.name.toLowerCase().includes(term.toLowerCase())
+			);
 
-		// setSearchData(filteredProducts);
+		setSearchData(filteredProducts);
 	};
 
 	window.addEventListener("scroll", () => {
@@ -79,16 +79,16 @@ const Header = ({ activeHeading }) => {
 							className="absolute right-2 top-1.5 cursor-pointer border-l-black"
 						/>
 						{searchData && searchData.length !== 0 ? (
-							<div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
+							<div className="absolute w-full min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-2">
 								{searchData.map((product) => {
 									return (
 										<Link
 											to={`/product/${product.name}`}
 											key={product._id}
 										>
-											<div className="w-full flex items-start-py-3">
+											<div className="w-full flex items-start py-3">
 												<img
-													src={product.image_url}
+													src={`${backend_url}${product?.images?.[0]}`}
 													alt="product"
 													className="w-[40px] h-[40px] mr-[10px]"
 												/>

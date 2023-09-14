@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { backend_url } from "../../server";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProductsShop } from "../../redux/actions/product";
+import { AiOutlineMessage } from "react-icons/ai";
 
-const ProductInfoSection = ({ data }) => {
+const ProductInfoSection = ({ data, products }) => {
 	const [active, setActive] = useState(1);
+
+	const handleMessageSubmit = () => {};
+
 	return (
 		<div className="bg-[#f5f6fb] px-3 800px:px-10 py-2 rounded">
 			<div className="w-full flex justify-between border-b pt-10 pb-2">
@@ -45,34 +51,7 @@ const ProductInfoSection = ({ data }) => {
 			{active === 1 ? (
 				<>
 					<p className="py-2 text-[18px] leading-9 pb-10 whitespace-pre-line">
-						Lorem ipsum dolor sit, amet consectetur adipisicing
-						elit. Odit expedita maiores eos voluptatum dolorum, sed,
-						dolores quia est quod id magnam. Aperiam ex aut corrupti
-						dolores odit ad cumque ullam? Lorem ipsum dolor sit,
-						amet consectetur adipisicing elit. Odit expedita maiores
-						eos voluptatum dolorum, sed, dolores quia est quod id
-						magnam. Aperiam ex aut corrupti dolores odit ad cumque
-						ullam?
-					</p>
-					<p className="py-2 text-[18px] leading-9 pb-10 whitespace-pre-line">
-						Lorem ipsum dolor sit, amet consectetur adipisicing
-						elit. Odit expedita maiores eos voluptatum dolorum, sed,
-						dolores quia est quod id magnam. Aperiam ex aut corrupti
-						dolores odit ad cumque ullam? Lorem ipsum dolor sit,
-						amet consectetur adipisicing elit. Odit expedita maiores
-						eos voluptatum dolorum, sed, dolores quia est quod id
-						magnam. Aperiam ex aut corrupti dolores odit ad cumque
-						ullam?
-					</p>
-					<p className="py-2 text-[18px] leading-9 pb-10 whitespace-pre-line">
-						Lorem ipsum dolor sit, amet consectetur adipisicing
-						elit. Odit expedita maiores eos voluptatum dolorum, sed,
-						dolores quia est quod id magnam. Aperiam ex aut corrupti
-						dolores odit ad cumque ullam? Lorem ipsum dolor sit,
-						amet consectetur adipisicing elit. Odit expedita maiores
-						eos voluptatum dolorum, sed, dolores quia est quod id
-						magnam. Aperiam ex aut corrupti dolores odit ad cumque
-						ullam?
+						{data.description}
 					</p>
 				</>
 			) : null}
@@ -92,22 +71,19 @@ const ProductInfoSection = ({ data }) => {
 								alt=""
 								className="w-[50px] h-[50px] rounded-full"
 							/>
+
 							<div className="pl-3">
-								<h3 className={`${styles.shop_name}`}>
-									{data.shop.name}
-								</h3>
+								<Link to={`/shop/${data.shopId}`}>
+									<h3 className={`${styles.shop_name}`}>
+										{data.shop.name}
+									</h3>
+								</Link>
 								<h5 className="pb-2 text=[15px]">
 									(4.5) Ratings
 								</h5>
 							</div>
 						</div>
-						<p className="pt-2">
-							Lorem ipsum, dolor sit amet consectetur adipisicing
-							elit. Maxime distinctio nostrum aspernatur labore
-							dolorem inventore saepe cumque, esse in obcaecati
-							consectetur autem magnam natus iusto error minus
-							nihil ipsam harums?
-						</p>
+						<p className="pt-2">{data.shop.description}</p>
 					</div>
 					<div className="w-full mt-5 800px:w-[50%] 800px:mt-0 800px:flex flex-col items-end">
 						<div className="text-left">
@@ -119,19 +95,30 @@ const ProductInfoSection = ({ data }) => {
 							</h5>
 							<h5 className="font-[600]">
 								Total Products:
-								<span className="font-[500]">20</span>
+								<span className="font-[500]">
+									{products?.length}
+								</span>
 							</h5>
 							<h5 className="font-[600]">
 								Total Reviews:
 								<span className="font-[500]">5</span>
 							</h5>
-							<Link to="/">
+							<Link to={`/shop/${data.shopId}`}>
 								<div
 									className={`${styles.button} !rounded-[4px] !h-[39.5px] mt-3`}
 								>
 									<h4 className="text-white">Shop Page</h4>
 								</div>
 							</Link>
+							<div
+								className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
+								onClick={handleMessageSubmit}
+							>
+								<span className="text-white flex items-center">
+									Send Message{" "}
+									<AiOutlineMessage className="ml-1" />
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>

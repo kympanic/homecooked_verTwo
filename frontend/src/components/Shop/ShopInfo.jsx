@@ -4,12 +4,14 @@ import styles from "../../styles/styles";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ShopInfo = ({ isOwner }) => {
+	const { products } = useSelector((state) => state.products);
+
 	const [data, setData] = useState({});
 	const { id } = useParams();
 	const navigate = useNavigate();
-
 	useEffect(() => {
 		axios
 			.get(`${server}/shop/get-shop-info/${id}`)
@@ -66,7 +68,7 @@ const ShopInfo = ({ isOwner }) => {
 			</div>
 			<div className="p-3">
 				<h5 className="font-[600]">Total Products</h5>
-				<h4 className="text-[#000000a6]">10</h4>
+				<h4 className="text-[#000000a6]">{products?.length}</h4>
 			</div>
 			<div className="p-3">
 				<h5 className="font-[600]">Shop Rating</h5>
