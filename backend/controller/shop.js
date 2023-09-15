@@ -199,7 +199,6 @@ router.get(
 	catchAsyncErrors(async (req, res, next) => {
 		try {
 			const shop = await Shop.findById(req.params.id);
-			console.log(shop, "is it getting here?");
 			res.status(201).json({
 				success: true,
 				shop,

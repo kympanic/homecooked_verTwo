@@ -9,9 +9,15 @@ import {
 } from "react-icons/ai";
 import { backend_url } from "../../../server";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { addToCart } from "../../../redux/actions/cart";
+
 const ProductDetailsCard = ({ setOpen, data }) => {
+	const { cart } = useSelector((state) => state.cart);
 	const [count, setCount] = useState(1);
 	const [click, setClick] = useState(false);
+	const dispatch = useDispatch();
 
 	// const [select, setSelect] = useState(false);
 	console.log(data, "this is the data");
@@ -25,6 +31,22 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 	const incrementCount = () => {
 		setCount(count + 1);
 	};
+
+	const addToCartHandler = (id) => {
+		const doesItemExist = cart && cart.find((i) => i._id === id);
+		if (doesItemExist) {
+			toast.error("Item already in cart");
+		} else {
+			if (data.stock < count) {
+				toast.error("Product stock limit exceeded");
+			} else {
+				const cartData = { ...data, qty: count };
+				dispatch(addToCart(cartData));
+				toast.success("Item added to cart");
+			}
+		}
+	};
+
 	return (
 		<div className="bg-[#fff]">
 			{data ? (
@@ -126,7 +148,12 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 								<div
 									className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}
 								>
-									<span className="text-[#fff] flex items-center">
+									<span
+										className="text-[#fff] flex items-center"
+										onClick={() =>
+											addToCartHandler(data._id)
+										}
+									>
 										Add to cart
 										<AiOutlineShoppingCart className="ml-1" />
 									</span>
