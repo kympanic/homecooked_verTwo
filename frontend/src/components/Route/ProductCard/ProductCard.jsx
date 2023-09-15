@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../../styles/styles";
 import ProductDetailsCard from "../ProductDetailsCard/ProductDetailsCard.jsx";
@@ -11,13 +11,58 @@ import {
 	AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { backend_url } from "../../../server";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	addToFavorites,
+	removeFromFavorites,
+} from "../../../redux/actions/favorites";
+import { toast } from "react-toastify";
+import { addToCart } from "../../../redux/actions/cart";
 
 const ProductCard = ({ data }) => {
+	const { favorites } = useSelector((state) => state.favorites);
+	const { cart } = useSelector((state) => state.cart);
+
 	const [click, setClick] = useState(false);
 	const [open, setOpen] = useState(false);
+	const dispatch = useDispatch();
 
 	const d = data.name;
 	const product_name = d.replace(/\s+/g, "-");
+
+	useEffect(() => {
+		if (favorites && favorites.find((i) => i._id === data._id)) {
+			setClick(true);
+		} else {
+			setClick(false);
+		}
+	}, [favorites, data._id]);
+
+	const removeFromFavoritesHandler = () => {
+		setClick(!click);
+		dispatch(removeFromFavorites(data));
+	};
+
+	const addToFavoritesHandler = () => {
+		setClick(!click);
+		dispatch(addToFavorites(data));
+	};
+
+	const addToCartHandler = (id) => {
+		const doesItemExist = cart && cart.find((i) => i._id === id);
+		if (doesItemExist) {
+			toast.error("Item already in cart");
+		} else {
+			if (data.stock < 1) {
+				toast.error("Product stock limit exceeded");
+			} else {
+				const cartData = { ...data, qty: 1 };
+				dispatch(addToCart(cartData));
+				toast.success("Item added to cart");
+			}
+		}
+	};
+
 	return (
 		<>
 			{data && (
@@ -84,7 +129,7 @@ const ProductCard = ({ data }) => {
 							<AiFillHeart
 								size={22}
 								className="cursor-pointer absolute right-2 top-5"
-								onClick={() => setClick(!click)}
+								onClick={() => removeFromFavoritesHandler()}
 								color={click ? "red" : "#333"}
 								title="Remove from favorites"
 							/>
@@ -92,7 +137,7 @@ const ProductCard = ({ data }) => {
 							<AiOutlineHeart
 								size={22}
 								className="cursor-pointer absolute right-2 top-5"
-								onClick={() => setClick(!click)}
+								onClick={() => addToFavoritesHandler()}
 								color={click ? "red" : "#333"}
 								title="Add to favorites"
 							/>
@@ -107,7 +152,7 @@ const ProductCard = ({ data }) => {
 						<AiOutlineShoppingCart
 							size={25}
 							className="cursor-pointer absolute right-2 top-24"
-							onClick={() => setOpen(!open)}
+							onClick={() => addToCartHandler(data._id)}
 							color="#444"
 							title="Add to cart"
 						/>

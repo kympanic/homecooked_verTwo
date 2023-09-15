@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import styles from "../../../styles/styles";
 import {
@@ -12,17 +12,29 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addToCart } from "../../../redux/actions/cart";
+import {
+	addToFavorites,
+	removeFromFavorites,
+} from "../../../redux/actions/favorites";
 
 const ProductDetailsCard = ({ setOpen, data }) => {
 	const { cart } = useSelector((state) => state.cart);
 	const [count, setCount] = useState(1);
 	const [click, setClick] = useState(false);
 	const dispatch = useDispatch();
-
+	const { favorites } = useSelector((state) => state.favorites);
 	// const [select, setSelect] = useState(false);
-	console.log(data, "this is the data");
+
+	useEffect(() => {
+		if (favorites && favorites.find((i) => i._id === data._id)) {
+			setClick(true);
+		} else {
+			setClick(false);
+		}
+	}, [favorites, data._id]);
 
 	const handleMessageSubmit = () => {};
+
 	const decrementCount = () => {
 		if (count > 1) {
 			setCount(count - 1);
@@ -47,6 +59,15 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 		}
 	};
 
+	const removeFromFavoritesHandler = () => {
+		setClick(!click);
+		dispatch(removeFromFavorites(data));
+	};
+
+	const addToFavoritesHandler = () => {
+		setClick(!click);
+		dispatch(addToFavorites(data));
+	};
 	return (
 		<div className="bg-[#fff]">
 			{data ? (
@@ -131,16 +152,20 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 											<AiFillHeart
 												size={30}
 												className="cursor-pointer"
-												onClick={() => setClick(!click)}
+												onClick={() =>
+													removeFromFavoritesHandler()
+												}
 												color={click ? "red" : "#333"}
-												title="Remove from wishlist"
+												title="Remove from favorites"
 											/>
 										) : (
 											<AiOutlineHeart
 												size={30}
 												className="cursor-pointer"
-												onClick={() => setClick(!click)}
-												title="Add to wishlist"
+												onClick={() =>
+													addToFavoritesHandler()
+												}
+												title="Add to favorites"
 											/>
 										)}
 									</div>
