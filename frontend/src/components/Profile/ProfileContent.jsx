@@ -24,8 +24,9 @@ const ProfileContent = ({ active }) => {
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
+			dispatch({ type: "clearErrors" });
 		}
-	}, [error]);
+	}, [error, dispatch]);
 
 	const handleUpdate = (e) => {
 		e.preventDefault();

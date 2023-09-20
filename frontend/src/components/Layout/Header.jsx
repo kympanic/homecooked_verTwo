@@ -18,7 +18,7 @@ import Cart from "../Cart/Cart";
 import Favorites from "../Favorites/Favorites";
 
 const Header = ({ activeHeading }) => {
-	const { isAuthenticated, user } = useSelector((state) => state.user);
+	const { isAuthenticated, user } = useSelector((state) => state?.user);
 	const { cart } = useSelector((state) => state.cart);
 	const { allProducts } = useSelector((state) => state.products);
 	const { favorites } = useSelector((state) => state.favorites);
@@ -196,7 +196,7 @@ const Header = ({ activeHeading }) => {
 								{isAuthenticated ? (
 									<Link to="/profile">
 										<img
-											src={`${backend_url}${user.avatar}`}
+											src={`${backend_url}${user?.avatar}`}
 											alt="profile"
 											className="w-[35px] h-[35px] rounded-full"
 										/>
@@ -254,7 +254,7 @@ const Header = ({ activeHeading }) => {
 								{isAuthenticated ? (
 									<Link to="/profile">
 										<img
-											src={`${backend_url}${user.avatar}`}
+											src={`${backend_url}${user?.avatar}`}
 											alt="profile"
 											className="w-[35px] h-[35px] rounded-full"
 										/>

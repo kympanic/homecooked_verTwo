@@ -22,7 +22,7 @@ export const loadUser = () => async (dispatch) => {
 	}
 };
 
-//update user
+//update user information
 export const updateUserInfo =
 	(email, password, phoneNumber, name) => async (dispatch) => {
 		try {
@@ -52,3 +52,61 @@ export const updateUserInfo =
 			});
 		}
 	};
+
+//update user address
+export const updateUserAddress =
+	(state, city, address1, address2, zipCode, addressType) =>
+	async (dispatch) => {
+		try {
+			dispatch({
+				type: "UpdateUserAddressRequest",
+			});
+			const { data } = await axios.put(
+				`${server}/user/update-address`,
+				{
+					state,
+					city,
+					address1,
+					address2,
+					zipCode,
+					addressType,
+				},
+				{ withCredentials: true }
+			);
+			dispatch({
+				type: "UpdateUserAddressSuccess",
+				payload: data.user,
+			});
+		} catch (error) {
+			dispatch({
+				type: "UpdateUserAddressFail",
+				payload: error.response.data.message,
+			});
+		}
+	};
+
+//delete user address
+export const deleteUserAddress = (id) => async (dispatch) => {
+	try {
+		dispatch({
+			type: "DeleteUserAddressRequest",
+		});
+
+		const { data } = await axios.delete(
+			`${server}/user/delete-address/${id}`,
+			{ withCredentials: true }
+		);
+		dispatch({
+			type: "deleteUserAddressSuccess",
+			payload: {
+				successMessage: "User deleted successfully!",
+				user: data.user,
+			},
+		});
+	} catch (error) {
+		dispatch({
+			type: "DeleteUserAddressFail",
+			payload: error.response.data.message,
+		});
+	}
+};

@@ -134,16 +134,16 @@ const CartSingle = ({ data, removeFromCartHandler, qtyChangeHandler }) => {
 					<img
 						src={`${backend_url}${data.images[0]}`}
 						alt=""
-						className="w-[130px] h-[130px] object-cover ml-5 mr-3 rounded-[5px]"
+						className="w-[70px] h-[70px] object-cover ml-5 mr-3 rounded-[5px]"
 					/>
 				</div>
-				<div className="pl-[5px]">
-					<h1>{data.name}</h1>
+				<div className="w-1/2 border truncate pl-[5px]">
+					<h1 className="truncate">{data.name}</h1>
 					<h4 className="font-[400] text-[15px] text-[#00000082]">
 						${data.price} * {value}
 					</h4>
 					<h4 className="font-[600] text-[17px] pt-[3px] text-[#d02222] font-Roboto">
-						${totalPrice}
+						${parseFloat(totalPrice).toFixed(2)}
 					</h4>
 				</div>
 				<RxCross1
