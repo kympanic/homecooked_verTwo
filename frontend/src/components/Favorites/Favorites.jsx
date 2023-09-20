@@ -87,7 +87,7 @@ const FavoriteSingle = ({
 
 	return (
 		<div className="border-b p-4">
-			<div className="w-full 800px:flex justify-start items-center border">
+			<div className="w-full 800px:flex justify-start items-center">
 				<RxCross1
 					className="cursor-pointer 800px:mb-['unset'] 800px:ml-['unset'] mb-4 ml-5 mr-5"
 					onClick={() => removeFromFavoritesHandler(data)}

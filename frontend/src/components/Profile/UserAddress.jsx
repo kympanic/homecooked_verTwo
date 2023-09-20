@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import styles from "../../styles/styles";
 
 const UserAddress = () => {
+	const [open, setOpen] = useState(false);
+
 	return (
 		<div className="w-full px-5">
 			<div className="flex w-full items-center justify-between">

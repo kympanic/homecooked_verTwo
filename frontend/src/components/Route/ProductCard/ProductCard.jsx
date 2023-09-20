@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../../styles/styles";
 import ProductDetailsCard from "../ProductDetailsCard/ProductDetailsCard.jsx";
-
 import {
 	AiFillHeart,
 	AiFillStar,
@@ -22,13 +21,9 @@ import { addToCart } from "../../../redux/actions/cart";
 const ProductCard = ({ data }) => {
 	const { favorites } = useSelector((state) => state.favorites);
 	const { cart } = useSelector((state) => state.cart);
-
 	const [click, setClick] = useState(false);
 	const [open, setOpen] = useState(false);
 	const dispatch = useDispatch();
-
-	const d = data.name;
-	const product_name = d.replace(/\s+/g, "-");
 
 	useEffect(() => {
 		if (favorites && favorites.find((i) => i._id === data._id)) {
@@ -67,7 +62,7 @@ const ProductCard = ({ data }) => {
 		<>
 			{data && (
 				<div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
-					<Link to={`/product/${product_name}`}>
+					<Link to={`/product/${data._id}`}>
 						<img
 							src={`${backend_url}${data?.images?.[0]}`}
 							alt=""
@@ -79,7 +74,7 @@ const ProductCard = ({ data }) => {
 							{data.shop.name}
 						</h5>
 					</Link>
-					<Link to={`/product/${product_name}`}>
+					<Link to={`/product/${data._id}`}>
 						<h4 className="pb-3 font-[500]">
 							{data.name.length > 40
 								? data.name.slice(0, 40) + "..."

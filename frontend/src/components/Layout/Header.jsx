@@ -85,7 +85,7 @@ const Header = ({ activeHeading }) => {
 								{searchData.map((product) => {
 									return (
 										<Link
-											to={`/product/${product.name}`}
+											to={`/product/${product._id}`}
 											key={product._id}
 										>
 											<div className="w-full flex items-start py-3">

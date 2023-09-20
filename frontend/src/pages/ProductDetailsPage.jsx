@@ -8,14 +8,13 @@ import { useSelector } from "react-redux";
 
 const ProductDetailsPage = () => {
 	const { allProducts } = useSelector((state) => state.products);
-	const { name } = useParams();
+	const { id } = useParams();
 	const [data, setData] = useState(null);
-	const productName = name.replace(/-/g, " ");
 
 	useEffect(() => {
-		const product = allProducts?.find((i) => i.name === productName);
+		const product = allProducts?.find((i) => i._id === id);
 		setData(product);
-	}, [allProducts, productName]);
+	}, [allProducts, id]);
 
 	return (
 		<div>

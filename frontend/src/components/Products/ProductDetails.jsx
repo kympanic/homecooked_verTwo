@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
-import {
-	AiFillHeart,
-	AiOutlineHeart,
-	AiOutlineShoppingCart,
-} from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProductInfoSection from "./ProductInfoSection";
 import { backend_url } from "../../server";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsShop } from "../../redux/actions/product";
+import { toast } from "react-toastify";
+import { addToCart } from "../../redux/actions/cart";
 
 const ProductDetails = ({ data }) => {
 	const { products } = useSelector((state) => state.products);
+	const { cart } = useSelector((state) => state.cart);
 	const [count, setCount] = useState(1);
-	const [click, setClick] = useState(false);
 	const [select, setSelect] = useState(0);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	console.log(data, "this is data");
-
 	useEffect(() => {
 		dispatch(getAllProductsShop(data && data.shopId));
 	}, [dispatch, data]);
@@ -38,7 +34,20 @@ const ProductDetails = ({ data }) => {
 		navigate("/inbox?conversation=test");
 	};
 
-	console.log(data, "this is data");
+	const addToCartHandler = (id) => {
+		const doesItemExist = cart && cart.find((i) => i._id === id);
+		if (doesItemExist) {
+			toast.error("Item already in cart");
+		} else {
+			if (data.stock < count) {
+				toast.error("Product stock limit exceeded");
+			} else {
+				const cartData = { ...data, qty: count };
+				dispatch(addToCart(cartData));
+				toast.success("Item added to cart");
+			}
+		}
+	};
 
 	return (
 		<div className="bg-white">
@@ -69,23 +78,6 @@ const ProductDetails = ({ data }) => {
 									<h1 className={`${styles.productTitle}`}>
 										{data.name}
 									</h1>
-
-									{click ? (
-										<AiFillHeart
-											size={30}
-											className="cursor-pointer ml-4"
-											onClick={() => setClick(!click)}
-											color={click ? "red" : "#333"}
-											title="Remove from wishlist"
-										/>
-									) : (
-										<AiOutlineHeart
-											size={30}
-											className="cursor-pointer ml-4"
-											onClick={() => setClick(!click)}
-											title="Add to wishlist"
-										/>
-									)}
 								</div>
 
 								<h4
@@ -115,6 +107,7 @@ const ProductDetails = ({ data }) => {
 								</div>
 								<div
 									className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
+									onClick={() => addToCartHandler(data._id)}
 								>
 									<span className="text-white flex items-center">
 										Add to cart{" "}
