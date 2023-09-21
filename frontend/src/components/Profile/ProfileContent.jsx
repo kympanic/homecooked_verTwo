@@ -6,7 +6,7 @@ import styles from "../../styles/styles";
 import Orders from "./Orders";
 import Refunds from "./Refunds";
 import TrackOrders from "./TrackOrders";
-import PaymentMethods from "./PaymentMethods";
+import ChangePassword from "./PaymentMethods";
 import UserAddress from "./UserAddress";
 import { updateUserInfo } from "../../redux/actions/user";
 import { toast } from "react-toastify";
@@ -169,7 +169,7 @@ const ProfileContent = ({ active }) => {
 			{/* Payment Methods Section */}
 			{active === 5 && (
 				<div>
-					<PaymentMethods />
+					<ChangePassword />
 				</div>
 			)}
 			{/* Address Section */}

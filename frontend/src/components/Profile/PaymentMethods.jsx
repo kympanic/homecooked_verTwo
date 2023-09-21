@@ -2,12 +2,12 @@ import React from "react";
 import styles from "../../styles/styles";
 import { AiOutlineDelete } from "react-icons/ai";
 
-const PaymentMethods = () => {
+const ChangePassword = () => {
 	return (
 		<div className="w-full px-5">
 			<div className="flex w-full items-center justify-between">
 				<h1 className="text-[25px] font-[600] text-[#000000ba] pb-2">
-					Payment Methods
+					Change Password
 				</h1>
 				<div className={`${styles.button} rounded-md`}>
 					<span className="text-white">Add New</span>
@@ -37,4 +37,4 @@ const PaymentMethods = () => {
 	);
 };
 
-export default PaymentMethods;
+export default ChangePassword;

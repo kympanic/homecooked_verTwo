@@ -32,7 +32,7 @@ const ProfileSideBar = ({ active, setActive }) => {
 		{ icon: "HiOutlineReceiptRefund", title: "Refunds" },
 		{ icon: "AiOutlineMessage", title: "Inbox" },
 		{ icon: "MdOutlineTrackChanges", title: "Track Order" },
-		{ icon: "AiOutlineCreditCard", title: "Payment Methods" },
+		{ icon: "MdOutlinePassword", title: "Change Password" },
 		{ icon: "TbAddressBook", title: "Address" },
 		{ icon: "AiOutlineLogin", title: "Log Out" },
 	];

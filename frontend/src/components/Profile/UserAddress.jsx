@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { RxCross1 } from "react-icons/rx";
 import { State, City } from "country-state-city";
-import { deleteUserAddress, updateUserAddress } from "../../redux/actions/user";
+import {
+	deleteUserAddress,
+	loadUser,
+	updateUserAddress,
+} from "../../redux/actions/user";
 
 const UserAddress = () => {
 	const { user, error, successMessage } = useSelector((state) => state.user);
@@ -39,7 +43,7 @@ const UserAddress = () => {
 			toast.success(successMessage);
 			dispatch({ type: "clearMessages" });
 		}
-	}, [error, successMessage, dispatch]);
+	}, [error, successMessage]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -68,8 +72,8 @@ const UserAddress = () => {
 
 	const removeAddressHandler = (item) => {
 		dispatch(deleteUserAddress(item._id));
+		toast.success("Address deleted successfully");
 	};
-	console.log(user, "this is the user");
 
 	return (
 		<div className="w-full px-5">
