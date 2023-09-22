@@ -298,4 +298,41 @@ router.delete(
 	})
 );
 
+//update password
+router.put(
+	"/update-password",
+	isAuthenticated,
+	catchAsyncErrors(async (req, res, next) => {
+		try {
+			const user = await User.findById(req.user.id).select("+password");
+			const isPasswordMatching = await user.comparePassword(
+				req.body.oldPassword
+			);
+			if (!isPasswordMatching) {
+				return next(
+					new ErrorHandler("Current password is incorrect!", 400)
+				);
+			}
+			if (req.body.newPassword !== req.body.confirmPassword) {
+				return next(
+					new ErrorHandler(
+						"Please make sure the new password and confirm password match!",
+						400
+					)
+				);
+			}
+			user.password = req.body.newPassword;
+
+			await user.save();
+
+			res.status(200).json({
+				success: true,
+				message: "Password updated successfully!",
+			});
+		} catch (error) {
+			return next(new ErrorHandler(error.message, 500));
+		}
+	})
+);
+
 module.exports = router;

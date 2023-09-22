@@ -6,7 +6,7 @@ import styles from "../../styles/styles";
 import Orders from "./Orders";
 import Refunds from "./Refunds";
 import TrackOrders from "./TrackOrders";
-import ChangePassword from "./PaymentMethods";
+import ChangePassword from "./ChangePassword";
 import UserAddress from "./UserAddress";
 import { updateUserInfo } from "../../redux/actions/user";
 import { toast } from "react-toastify";
@@ -126,7 +126,7 @@ const ProfileContent = ({ active }) => {
 							<div className=" w-[100%] 800px:w-[50%]">
 								<label className="block pb-2">Password</label>
 								<input
-									type="text"
+									type="password"
 									className={`${styles.input} focus:border-blue-500 !w-[95%] mb-4 800px:mb-0`}
 									required
 									value={password}

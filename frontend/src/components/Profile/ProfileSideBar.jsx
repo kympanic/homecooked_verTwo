@@ -2,11 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { RxPerson } from "react-icons/rx";
 import { HiOutlineShoppingBag, HiOutlineReceiptRefund } from "react-icons/hi";
-import {
-	AiOutlineMessage,
-	AiOutlineCreditCard,
-	AiOutlineLogin,
-} from "react-icons/ai";
+import { AiOutlineMessage, AiOutlineLogin } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
 import { MdOutlineTrackChanges } from "react-icons/md";
 import { TbAddressBook } from "react-icons/tb";
 import axios from "axios";
@@ -19,7 +16,7 @@ const iconMapping = {
 	HiOutlineReceiptRefund,
 	AiOutlineMessage,
 	MdOutlineTrackChanges,
-	AiOutlineCreditCard,
+	RiLockPasswordLine,
 	TbAddressBook,
 	AiOutlineLogin,
 };
@@ -32,7 +29,7 @@ const ProfileSideBar = ({ active, setActive }) => {
 		{ icon: "HiOutlineReceiptRefund", title: "Refunds" },
 		{ icon: "AiOutlineMessage", title: "Inbox" },
 		{ icon: "MdOutlineTrackChanges", title: "Track Order" },
-		{ icon: "MdOutlinePassword", title: "Change Password" },
+		{ icon: "RiLockPasswordLine", title: "Change Password" },
 		{ icon: "TbAddressBook", title: "Address" },
 		{ icon: "AiOutlineLogin", title: "Log Out" },
 	];
