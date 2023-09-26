@@ -17,10 +17,9 @@ const Cart = ({ setOpenCart }) => {
 	const removeFromCartHandler = (data) => {
 		dispatch(removeFromCart(data));
 	};
-	const totalPrice = cart.reduce(
-		(acc, item) => acc + item.qty * item.price,
-		0
-	);
+	const totalPrice =
+		cart.reduce((acc, item) => acc + item.qty * (item.price * 100), 0) /
+		100;
 
 	const qtyChangeHandler = (data) => {
 		dispatch(addToCart(data));
@@ -75,13 +74,17 @@ const Cart = ({ setOpenCart }) => {
 							</div>
 						</div>
 
-						<div className="px-5 mb-3">
+						<div
+							className="px-5 mb-3"
+							onClick={() => setOpenCart(false)}
+						>
 							<Link to="/checkout">
 								<div
 									className={`h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]`}
 								>
 									<h1 className="text-[#fff] text-[18px] font-[600]">
-										Checkout Now (USD${totalPrice})
+										Checkout Now (USD$
+										{parseFloat(totalPrice).toFixed(2)})
 									</h1>
 								</div>
 							</Link>
@@ -95,7 +98,7 @@ const Cart = ({ setOpenCart }) => {
 
 const CartSingle = ({ data, removeFromCartHandler, qtyChangeHandler }) => {
 	const [value, setValue] = useState(data.qty);
-	const totalPrice = data.price * value;
+	const totalPrice = (data.price * 100 * value) / 100;
 
 	const increment = (data) => {
 		if (data.stock < value) {
