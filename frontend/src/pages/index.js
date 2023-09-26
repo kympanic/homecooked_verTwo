@@ -14,6 +14,7 @@ import CheckoutPage from "./CheckoutPage";
 import ShopCreatePage from "./ShopCreatePage";
 import ShopHomePage from "./ShopHomePage";
 import ShopDashboardPage from "./ShopDashboardPage";
+import PaymentPage from "./PaymentPage";
 
 export {
 	LoginPage,
@@ -32,4 +33,5 @@ export {
 	ShopLoginPage,
 	ShopHomePage,
 	ShopDashboardPage,
+	PaymentPage,
 };

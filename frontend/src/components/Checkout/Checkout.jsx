@@ -63,6 +63,7 @@ const Checkout = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
+
 	const handleCouponSubmit = async (e) => {
 		e.preventDefault();
 		const name = couponCode;

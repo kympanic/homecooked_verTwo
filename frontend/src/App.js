@@ -15,6 +15,7 @@ import {
 	FaqPage,
 	HomePage,
 	LoginPage,
+	PaymentPage,
 	ProductDetailsPage,
 	ProductsPage,
 	ProfilePage,
@@ -68,6 +69,14 @@ function App() {
 					element={
 						<UserProtectedRoute>
 							<CheckoutPage />
+						</UserProtectedRoute>
+					}
+				/>
+				<Route
+					path="/payment"
+					element={
+						<UserProtectedRoute>
+							<PaymentPage />
 						</UserProtectedRoute>
 					}
 				/>
