@@ -1,22 +1,21 @@
-import React from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { DataGrid } from "@mui/x-data-grid";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllOrdersUser } from "../../redux/actions/order";
 
 const Orders = () => {
-	// static orders info for now
-	const orders = [
-		{
-			_id: "7125125jhsdf2124",
-			orderItems: [
-				{ name: "Carne Asada Tacos" },
-				{ name: "Loaded cheese fries" },
-			],
-			totalPrice: 29.5,
-			orderStatus: "Processing",
-		},
-	];
+	const { user } = useSelector((state) => state.user);
+	const { orders } = useSelector((state) => state.orders);
+	const dispatch = useDispatch();
+
+	console.log(user._id, "this is the user id");
+
+	useEffect(() => {
+		dispatch(getAllOrdersUser(user._id));
+	}, []);
 
 	const columns = [
 		{ field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -75,11 +74,12 @@ const Orders = () => {
 		orders.forEach((item) => {
 			row.push({
 				id: item._id,
-				itemsQty: item.orderItems.length,
-				total: "$ " + item.totalPrice,
-				status: item.orderStatus,
+				itemsQty: item.cart.length,
+				total: "$ " + item.totalPrice.toFixed(2),
+				status: item.status,
 			});
 		});
+	console.log(orders, "these are the orders");
 
 	return (
 		<div>

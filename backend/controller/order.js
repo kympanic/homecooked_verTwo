@@ -41,7 +41,28 @@ router.post(
 				orders,
 			});
 		} catch (error) {
-			return next(new ErrorHandler("User already exists", 400));
+			return next(new ErrorHandler(error.message, 400));
+		}
+	})
+);
+
+// get all orders of user
+
+router.get(
+	"/get-all/:userId",
+	catchAsyncErrors(async (req, res, next) => {
+		try {
+			const orders = await Order.find({
+				"user._id": req.params.userId,
+			}).sort({
+				createdAt: -1,
+			});
+			res.status(201).json({
+				success: true,
+				orders,
+			});
+		} catch (error) {
+			return next(new ErrorHandler(error.messsage, 400));
 		}
 	})
 );
