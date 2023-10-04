@@ -25,6 +25,7 @@ import {
 	ShopLoginPage,
 	ShopDashboardPage,
 	SignupPage,
+	OrderSuccessPage,
 } from "./pages";
 import UserProtectedRoute from "./protectedRoutes/UserProtectedRoute";
 import SellerProtectedRoute from "./protectedRoutes/SellerProtectedRoute";
@@ -77,6 +78,7 @@ function App() {
 				<Route path="/best-selling" element={<BestSellingPage />} />
 				<Route path="/events" element={<EventsPage />} />
 				<Route path="/faq" element={<FaqPage />} />
+				<Route path="/order/success" element={<OrderSuccessPage />} />
 				<Route
 					path="/profile"
 					element={

@@ -46,8 +46,6 @@ const Checkout = () => {
 		}
 	};
 
-	console.log(cart, "this is the cart");
-
 	const subTotalPrice = cart.reduce(
 		(acc, item) => acc + item.qty * item.price,
 		0
