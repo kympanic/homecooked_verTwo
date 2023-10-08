@@ -6,7 +6,7 @@ const UserProtectedRoute = ({ children }) => {
 
 	if (loading === false) {
 		if (!isAuthenticated) {
-			return <Navigate to={`/shop-login`} replace />;
+			return <Navigate to={`/login`} replace />;
 		}
 		return children;
 	}

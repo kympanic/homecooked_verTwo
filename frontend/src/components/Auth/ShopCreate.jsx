@@ -16,7 +16,6 @@ const ShopCreate = () => {
 	const [avatar, setAvatar] = useState(null);
 	const [password, setPassword] = useState("");
 	const [visible, setVisible] = useState(false);
-	const navigate = useNavigate();
 
 	const handleFileInputChange = (e) => {
 		const file = e.target.files[0];

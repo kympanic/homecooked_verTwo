@@ -26,6 +26,7 @@ import {
 	ShopDashboardPage,
 	SignupPage,
 	OrderSuccessPage,
+	ShopOrderDetailsPage,
 } from "./pages";
 import UserProtectedRoute from "./protectedRoutes/UserProtectedRoute";
 import SellerProtectedRoute from "./protectedRoutes/SellerProtectedRoute";
@@ -54,11 +55,16 @@ function App() {
 		<BrowserRouter>
 			{stripeApiKey && (
 				<Elements stripe={loadStripe(stripeApiKey)}>
-					<UserProtectedRoute>
-						<Routes>
-							<Route path="/payment" element={<PaymentPage />} />
-						</Routes>
-					</UserProtectedRoute>
+					<Routes>
+						<Route
+							path="/payment"
+							element={
+								<UserProtectedRoute>
+									<PaymentPage />
+								</UserProtectedRoute>
+							}
+						/>
+					</Routes>
 				</Elements>
 			)}
 			<Routes>
@@ -105,6 +111,14 @@ function App() {
 					element={
 						<SellerProtectedRoute>
 							<ShopDashboardPage />
+						</SellerProtectedRoute>
+					}
+				/>
+				<Route
+					path="/order/:id"
+					element={
+						<SellerProtectedRoute>
+							<ShopOrderDetailsPage />
 						</SellerProtectedRoute>
 					}
 				/>

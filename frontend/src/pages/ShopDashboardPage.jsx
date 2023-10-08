@@ -13,7 +13,7 @@ const ShopDashboardPage = () => {
 	const [active, setActive] = useState(1);
 	return (
 		<div>
-			<DashboardHeader />
+			<DashboardHeader active={active} setActive={setActive} />
 			<div className="flex items-center justify-between w-full">
 				<div className="w-[88px] 800px:w-[20%]">
 					<DashboardSideBar active={active} setActive={setActive} />

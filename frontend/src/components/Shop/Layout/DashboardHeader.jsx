@@ -5,7 +5,7 @@ import { backend_url } from "../../../server";
 import { AiOutlineGift } from "react-icons/ai";
 import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { BiMessageSquareDetail } from "react-icons/bi";
-const DashboardHeader = () => {
+const DashboardHeader = ({ active, setActive }) => {
 	const { seller } = useSelector((state) => state.shop);
 
 	return (
@@ -19,39 +19,34 @@ const DashboardHeader = () => {
 			</div>
 			<div className="flex items-center">
 				<div className="flex items-center mr-4">
-					<Link
-						to="/dashboard-coupons"
-						className="800px:block hidden"
-					>
-						<AiOutlineGift
-							color="#555"
-							size={30}
-							className="mx-5"
-						/>
-					</Link>
-					<Link
-						to="/dashboard-products"
-						className="800px:block hidden"
-					>
-						<FiShoppingBag
-							color="#555"
-							size={30}
-							className="mx-5"
-						/>
-					</Link>
-					<Link to="/dashboard-orders" className="800px:block hidden">
-						<FiPackage color="#555" size={30} className="mx-5" />
-					</Link>
-					<Link
-						to="/dashboard-messages"
-						className="800px:block hidden"
-					>
-						<BiMessageSquareDetail
-							color="#555"
-							size={30}
-							className="mx-5"
-						/>
-					</Link>
+					<AiOutlineGift
+						color="#555"
+						size={30}
+						className="mx-5 cursor-pointer"
+						onClick={() => setActive(6)}
+					/>
+
+					<FiShoppingBag
+						color="#555"
+						size={30}
+						className="mx-5 cursor-pointer"
+						onClick={() => setActive(2)}
+					/>
+
+					<FiPackage
+						color="#555"
+						size={30}
+						className="mx-5 cursor-pointer"
+						onClick={() => setActive(3)}
+					/>
+
+					<BiMessageSquareDetail
+						color="#555"
+						size={30}
+						className="mx-5 cursor-pointer"
+						onClick={() => setActive(5)}
+					/>
+
 					<Link to={`/shop/${seller._id}`}>
 						<img
 							className="h-[40px] rounded-full mx-5"

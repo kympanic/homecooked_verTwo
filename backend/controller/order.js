@@ -46,7 +46,7 @@ router.post(
 	})
 );
 
-// get all orders of user
+//get all orders of user
 
 router.get(
 	"/get-all/:userId",
@@ -67,4 +67,23 @@ router.get(
 	})
 );
 
+//get all orders of shop
+router.get(
+	"/get-all-shop/:shopId",
+	catchAsyncErrors(async (req, res, next) => {
+		try {
+			const orders = await Order.find({
+				"cart.shopId": req.params.shopId,
+			}).sort({
+				createdAt: -1,
+			});
+			res.status(201).json({
+				success: true,
+				orders,
+			});
+		} catch (error) {
+			return next(new ErrorHandler(error.messsage, 400));
+		}
+	})
+);
 module.exports = router;

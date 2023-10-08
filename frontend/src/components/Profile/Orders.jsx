@@ -79,7 +79,6 @@ const Orders = () => {
 				status: item.status,
 			});
 		});
-	console.log(orders, "these are the orders");
 
 	return (
 		<div>
