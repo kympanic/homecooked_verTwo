@@ -9,7 +9,6 @@ import { backend_url } from "../../server";
 const OrderDetails = () => {
 	const { orders, isLoading } = useSelector((state) => state.orders);
 	const { seller } = useSelector((state) => state.shop);
-
 	const dispatch = useDispatch();
 	const [status, setStatus] = useState("");
 	const { id } = useParams();
@@ -19,7 +18,12 @@ const OrderDetails = () => {
 	}, [dispatch]);
 
 	const data = orders && orders.find((item) => item._id === id);
-	console.log(data);
+
+	const orderUpdateHandler = (e) => {
+		console.log("eeee");
+	};
+	console.log(data, "this is the data");
+
 	return (
 		<div className={`py-4 min-h-screen ${styles.section}`}>
 			<div className="w-full flex items-center justify-between">
@@ -49,7 +53,7 @@ const OrderDetails = () => {
 				data?.cart.map((item, index) => (
 					<div className="w-full flex items-start mb-5" key={index}>
 						<img
-							src={`${backend_url}${item.images[0]}}`}
+							src={`${backend_url}${item.images[0]}`}
 							alt=""
 							className="w-[80px] h-[80px]"
 						/>
@@ -71,9 +75,53 @@ const OrderDetails = () => {
 			<div className="w-full 800px:flex items-center">
 				<div className="w-full 800px:w-[60%]">
 					<h4 className="pt-3 text-[20px] font-[600]">
-						Shipping Address
+						Shipping Address:
+					</h4>
+					<h4 className="pt-3 text-[20px]">
+						{data?.shippingAddress.address1 +
+							" " +
+							data?.shippingAddress.address2}
+					</h4>
+					<h4 className="text-[20px]">
+						{data?.shippingAddress.state}
+					</h4>
+					<h4 className="text-[20px]">
+						{data?.shippingAddress.city}
+					</h4>
+					<h4 className="text-[20px]">{data?.user?.phoneNumber}</h4>
+				</div>
+				<div className="w-full 800px:w-[40%]">
+					<h4 className="pt-3 text-[20px]">Payment Info:</h4>
+					<h4 className="text-[20px]">
+						Status: {data?.paymentInfo?.status}
 					</h4>
 				</div>
+			</div>
+			<br />
+			<br />
+			<h4 className="pt-3 text-[20px] font-[600]">Order Status:</h4>
+			<select
+				value={status}
+				onChange={(e) => setStatus(e.target.value)}
+				className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
+			>
+				{["Processing", "Shipping", "Delivered"]
+					.slice(
+						["Processing", "Shipping", "Delivered"].indexOf(
+							data?.status
+						)
+					)
+					.map((option, index) => (
+						<option value={option} key={index}>
+							{option}
+						</option>
+					))}
+			</select>
+			<div
+				className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
+				onClick={orderUpdateHandler}
+			>
+				Update Status
 			</div>
 		</div>
 	);

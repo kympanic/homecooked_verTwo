@@ -11,8 +11,6 @@ const Orders = () => {
 	const { orders } = useSelector((state) => state.orders);
 	const dispatch = useDispatch();
 
-	console.log(user._id, "this is the user id");
-
 	useEffect(() => {
 		dispatch(getAllOrdersUser(user._id));
 	}, []);
