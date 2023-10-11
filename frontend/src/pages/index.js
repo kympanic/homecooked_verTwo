@@ -17,6 +17,7 @@ import ShopDashboardPage from "./ShopDashboardPage";
 import PaymentPage from "./PaymentPage";
 import OrderSuccessPage from "./OrderSuccessPage";
 import ShopOrderDetailsPage from "./ShopOrderDetailsPage";
+import OrderDetailsPage from "./OrderDetailsPage";
 
 export {
 	LoginPage,
@@ -38,4 +39,5 @@ export {
 	PaymentPage,
 	OrderSuccessPage,
 	ShopOrderDetailsPage,
+	OrderDetailsPage,
 };

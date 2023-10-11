@@ -27,6 +27,7 @@ import {
 	SignupPage,
 	OrderSuccessPage,
 	ShopOrderDetailsPage,
+	OrderDetailsPage,
 } from "./pages";
 import UserProtectedRoute from "./protectedRoutes/UserProtectedRoute";
 import SellerProtectedRoute from "./protectedRoutes/SellerProtectedRoute";
@@ -90,6 +91,14 @@ function App() {
 					element={
 						<UserProtectedRoute>
 							<ProfilePage />
+						</UserProtectedRoute>
+					}
+				/>
+				<Route
+					path="/user/order/:orderId"
+					element={
+						<UserProtectedRoute>
+							<OrderDetailsPage />
 						</UserProtectedRoute>
 					}
 				/>

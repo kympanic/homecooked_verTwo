@@ -3,25 +3,27 @@ import styles from "../../styles/styles";
 import { BsFillBagFill } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrdersShop } from "../../redux/actions/order";
+import { getAllOrdersUser } from "../../redux/actions/order";
 import { backend_url } from "../../server";
 
-const OrderDetails = () => {
-	const { orders, isLoading } = useSelector((state) => state.orders);
-	const { seller } = useSelector((state) => state.shop);
+const UserOrderDetails = () => {
+	const { user } = useSelector((state) => state.user);
+	const { orders } = useSelector((state) => state.orders);
 	const dispatch = useDispatch();
 	const [status, setStatus] = useState("");
-	const { id } = useParams();
+	const { orderId } = useParams();
 
 	useEffect(() => {
-		dispatch(getAllOrdersShop(seller._id));
+		dispatch(getAllOrdersUser(user._id));
 	}, [dispatch]);
 
-	const data = orders && orders.find((item) => item._id === id);
+	const data = orders && orders.find((item) => item._id === orderId);
 
 	const orderUpdateHandler = (e) => {
 		console.log("eeee");
 	};
+	console.log(typeof id, "this is id");
+	console.log(orders, "this is orders");
 	console.log(data, "this is the data");
 
 	return (
@@ -31,12 +33,6 @@ const OrderDetails = () => {
 					<BsFillBagFill size={30} color="crimson" />
 					<h1 className="pl-2 text-[25px]">Order Details</h1>
 				</div>
-				<Link
-					to="/dashboard"
-					className={`${styles.button} !bg-[#fce1e6] !rounded-[4px] text-[#e94560] font-[600] !h-[45px] text-[18px]`}
-				>
-					Dashboard
-				</Link>
 			</div>
 			<div className="w-full flex items-center justify-between pt-6">
 				<h5 className="text-[#00000084]">
@@ -95,39 +91,15 @@ const OrderDetails = () => {
 					<h4 className="text-[20px]">
 						Status:{" "}
 						{data?.paymentInfo?.status
-							? data?.paymentInfo?.status
+							? data?.paymentInfo.status
 							: "Not Paid"}
 					</h4>
 				</div>
 			</div>
 			<br />
 			<br />
-			<h4 className="pt-3 text-[20px] font-[600]">Order Status:</h4>
-			<select
-				value={status}
-				onChange={(e) => setStatus(e.target.value)}
-				className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
-			>
-				{["Processing", "Shipping", "Delivered"]
-					.slice(
-						["Processing", "Shipping", "Delivered"].indexOf(
-							data?.status
-						)
-					)
-					.map((option, index) => (
-						<option value={option} key={index}>
-							{option}
-						</option>
-					))}
-			</select>
-			<div
-				className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
-				onClick={orderUpdateHandler}
-			>
-				Update Status
-			</div>
 		</div>
 	);
 };
 
-export default OrderDetails;
+export default UserOrderDetails;
