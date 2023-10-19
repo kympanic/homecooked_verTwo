@@ -97,6 +97,8 @@ const UserOrderDetails = () => {
 				</div>
 			</div>
 			<br />
+			<div className={`${styles.button} text-white`}> Send Message</div>
+			<br />
 			<br />
 		</div>
 	);

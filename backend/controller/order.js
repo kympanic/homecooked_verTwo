@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const { isAuthenticated } = require("../middleware/auth");
+const { isAuthenticated, isSeller } = require("../middleware/auth");
 const Order = require("../model/order");
 const Product = require("../model/product");
 
@@ -86,4 +86,43 @@ router.get(
 		}
 	})
 );
+
+//update order status for shop
+router.put(
+	"/update-order-status/:id",
+	isSeller,
+	catchAsyncErrors(async (req, res, next) => {
+		try {
+			const order = await Order.findById(req.params.id);
+			if (!order) {
+				return next(new ErrorHandler("Order not found", 400));
+			}
+			if (req.body.status === "Shipping") {
+				order.cart.forEach(async (o) => {
+					await updateProduct(o._id, o.qty);
+				});
+			}
+
+			order.status = req.body.status;
+
+			if (req.body.status === "Delivered") {
+				order.deliveredAt = Date.now();
+				order.paymentInfo.status = "Succeeded";
+			}
+
+			await order.save({ validateBeforeSave: false });
+
+			async function updateProduct(id, qty) {
+				const product = await Product.findById(id);
+				product.stock -= qty;
+				product.sold_out += qty;
+
+				await product.save({ validateBeforeSave: false });
+			}
+		} catch (error) {
+			return next(new ErrorHandler(error.messsage, 400));
+		}
+	})
+);
+
 module.exports = router;
