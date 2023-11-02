@@ -112,6 +112,11 @@ router.put(
 
 			await order.save({ validateBeforeSave: false });
 
+			res.status(200).json({
+				success: true,
+				order,
+			});
+
 			async function updateProduct(id, qty) {
 				const product = await Product.findById(id);
 				product.stock -= qty;

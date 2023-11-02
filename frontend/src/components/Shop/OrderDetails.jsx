@@ -4,7 +4,9 @@ import { BsFillBagFill } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersShop } from "../../redux/actions/order";
-import { backend_url } from "../../server";
+import { backend_url, server } from "../../server";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const OrderDetails = () => {
 	const { orders, isLoading } = useSelector((state) => state.orders);
@@ -19,10 +21,20 @@ const OrderDetails = () => {
 
 	const data = orders && orders.find((item) => item._id === id);
 
-	const orderUpdateHandler = (e) => {
-		console.log("eeee");
+	const orderUpdateHandler = async (e) => {
+		await axios
+			.put(
+				`${server}/order/update-order-status/${id}`,
+				{ status },
+				{ withCredentials: true }
+			)
+			.then((res) => {
+				toast.success("Order updated!");
+			})
+			.catch((error) => {
+				toast.error(error.response.data.message);
+			});
 	};
-	console.log(data, "this is the data");
 
 	return (
 		<div className={`py-4 min-h-screen ${styles.section}`}>
