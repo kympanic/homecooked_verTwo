@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/styles";
 import { BsFillBagFill } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersUser } from "../../redux/actions/order";
 import { backend_url } from "../../server";
+import { RxCross1 } from "react-icons/rx";
 
 const UserOrderDetails = () => {
 	const { user } = useSelector((state) => state.user);
 	const { orders } = useSelector((state) => state.orders);
+	const { orderId } = useParams();
 	const dispatch = useDispatch();
 	const [status, setStatus] = useState("");
-	const { orderId } = useParams();
+	const [open, setOpen] = useState(false);
+	const [selectedItem, setSelectedItem] = useState(null);
 
 	useEffect(() => {
 		dispatch(getAllOrdersUser(user._id));
@@ -59,8 +62,58 @@ const UserOrderDetails = () => {
 								USD ${item.price} * {item.qty}
 							</h5>
 						</div>
+						{data?.status === "Delivered" && (
+							<div
+								className={`${styles.button} text-[#fff]`}
+								onClick={() =>
+									setOpen(true) || setSelectedItem(item)
+								}
+							>
+								Write a Review
+							</div>
+						)}
 					</div>
 				))}
+			{/* Review popup */}
+			{open && (
+				<div className="w-full fixed top-0 left-0 h-screen bg-[#0005] z-50 flex items-center justify-center">
+					<div className="w-[50%] h-[80vh] bg-[#fff] shadow rounded-md p-3">
+						<div className="w-full flex justify-end p-3">
+							<RxCross1
+								size={30}
+								onClick={() => setOpen(false)}
+								className="cursor-pointer"
+							/>
+						</div>
+						<h2 className="text-[30px] font-[500] font-Poppins text-center">
+							Give a Review
+						</h2>
+						<br />
+						<div className="w-full flex">
+							<img
+								src={`${backend_url}/${selectedItem?.images[0]}`}
+								alt=""
+								className="w-[140px] h-[120px]"
+							/>
+							<div>
+								<div className="pl-3 text-[20px]">
+									{selectedItem?.name}
+								</div>
+							</div>
+							<h4 className="pl-3 text-[20px]">
+								${selectedItem?.price} x {selectedItem?.qty}
+							</h4>
+						</div>
+						<br />
+						<br />
+						{/* ratings */}
+						<h5 className="pl-3 text-[20px] font-[500]">
+							Give a Rating{" "}
+							<span className="text-red-500">*</span>
+						</h5>
+					</div>
+				</div>
+			)}
 			<div className="border-t w-full text-right">
 				<h5 className="pt-3 text-[18px]">
 					Total Price <strong>${data?.totalPrice.toFixed(2)}</strong>
