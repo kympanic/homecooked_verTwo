@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersUser } from "../../redux/actions/order";
 import { backend_url } from "../../server";
 import { RxCross1 } from "react-icons/rx";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 const UserOrderDetails = () => {
 	const { user } = useSelector((state) => state.user);
@@ -15,6 +16,7 @@ const UserOrderDetails = () => {
 	const [status, setStatus] = useState("");
 	const [open, setOpen] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);
+	const [rating, setRating] = useState(1);
 
 	useEffect(() => {
 		dispatch(getAllOrdersUser(user._id));
@@ -86,7 +88,7 @@ const UserOrderDetails = () => {
 							/>
 						</div>
 						<h2 className="text-[30px] font-[500] font-Poppins text-center">
-							Give a Review
+							Write a Review
 						</h2>
 						<br />
 						<div className="w-full flex">
@@ -111,6 +113,27 @@ const UserOrderDetails = () => {
 							Give a Rating{" "}
 							<span className="text-red-500">*</span>
 						</h5>
+						<div className="flex w0full ml-2 pt-1">
+							{[1, 2, 3, 4, 5].map((i) =>
+								rating >= i ? (
+									<AiFillStar
+										key={i}
+										className="mr-1 cursor-pointer"
+										color="rgb(246,186,0)"
+										size={25}
+										onClick={() => setRating(i)}
+									/>
+								) : (
+									<AiOutlineStar
+										key={i}
+										className="mr-1 cursor-pointer"
+										color="rgb(246,186,0)"
+										size={25}
+										onClick={() => setRating(i)}
+									/>
+								)
+							)}
+						</div>
 					</div>
 				</div>
 			)}
