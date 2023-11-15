@@ -24,12 +24,7 @@ const UserOrderDetails = () => {
 
 	const data = orders && orders.find((item) => item._id === orderId);
 
-	const orderUpdateHandler = (e) => {
-		console.log("eeee");
-	};
-	console.log(typeof id, "this is id");
-	console.log(orders, "this is orders");
-	console.log(data, "this is the data");
+	const reviewHandler = () => {};
 
 	return (
 		<div className={`py-4 min-h-screen ${styles.section}`}>
@@ -79,7 +74,7 @@ const UserOrderDetails = () => {
 			{/* Review popup */}
 			{open && (
 				<div className="w-full fixed top-0 left-0 h-screen bg-[#0005] z-50 flex items-center justify-center">
-					<div className="w-[50%] h-[80vh] bg-[#fff] shadow rounded-md p-3">
+					<div className="w-[50%] h-min bg-[#fff] shadow rounded-md p-3">
 						<div className="w-full flex justify-end p-3">
 							<RxCross1
 								size={30}
@@ -133,6 +128,31 @@ const UserOrderDetails = () => {
 									/>
 								)
 							)}
+						</div>
+						<br />
+						<div className="w-full ml-3">
+							<label className="block text-[20px] font-[500]">
+								Write a comment
+								<span className="ml-1 font-[400] text-[16px] text-[#00000052]">
+									(optional)
+								</span>
+							</label>
+							<textarea
+								name="comment"
+								id=""
+								maxLength={500}
+								className="mt-2 appearance-none block w-[95%]
+								p-3 h-[300px] border border-gray-300
+								rounded-[3px] placeholder-gray-400
+								focus:outline-none focus:ring-blue-500
+								focus:border-blue-500 resize-none pb-4"
+							></textarea>
+						</div>
+						<div
+							className={`${styles.button}text-[20px] ml-3 cursor-pointer `}
+							onClick={reviewHandler}
+						>
+							<span className="text-white">Submit</span>
 						</div>
 					</div>
 				</div>
