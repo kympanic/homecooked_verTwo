@@ -101,4 +101,46 @@ router.delete(
 	})
 );
 
+//add review for a product
+router.put(
+	"/create-review",
+	catchAsyncErrors(async (req, res, next) => {
+		try {
+			const { user, rating, comment, productId } = req.body;
+			const product = await Product.findById(productId);
+			const isReviewed = product.reviews.find(
+				(review) => review.user._id === req.user._id
+			);
+			if (isReviewed) {
+				product.reviews.forEach((review) => {
+					if (review.user._id === req.user._id) {
+						(review.rating = rating),
+							(review.comment = comment),
+							(review.user = user);
+					}
+				});
+			} else {
+				product.reviews.push(review);
+			}
+			let totalRatings = 0;
+			product.reviews.forEach((review) => {
+				totalRatings += review.rating;
+			});
+
+			product.avgRating = totalRatings / product.reviews.length;
+
+			await product.save({ validateBeforeSave: false });
+			res.status(
+				200,
+				json({
+					success: true,
+					message: "Reviewed successfully!",
+				})
+			);
+		} catch (error) {
+			return next(new ErrorHandler(error, 400));
+		}
+	})
+);
+
 module.exports = router;
