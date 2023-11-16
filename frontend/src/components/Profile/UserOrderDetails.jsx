@@ -4,9 +4,11 @@ import { BsFillBagFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersUser } from "../../redux/actions/order";
-import { backend_url } from "../../server";
+import { backend_url, server } from "../../server";
 import { RxCross1 } from "react-icons/rx";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const UserOrderDetails = () => {
 	const { user } = useSelector((state) => state.user);
@@ -15,8 +17,10 @@ const UserOrderDetails = () => {
 	const dispatch = useDispatch();
 	const [status, setStatus] = useState("");
 	const [open, setOpen] = useState(false);
+	const [comment, setComment] = useState("");
 	const [selectedItem, setSelectedItem] = useState(null);
-	const [rating, setRating] = useState(1);
+	const [rating, setRating] = useState(0);
+	console.log(rating, "this is the rating");
 
 	useEffect(() => {
 		dispatch(getAllOrdersUser(user._id));
@@ -24,7 +28,27 @@ const UserOrderDetails = () => {
 
 	const data = orders && orders.find((item) => item._id === orderId);
 
-	const reviewHandler = () => {};
+	const reviewHandler = async (e) => {
+		await axios
+			.put(
+				`${server}/product/create-review`,
+				{
+					user,
+					rating,
+					comment,
+					productId: selectedItem?._id,
+				},
+				{ withCredentials: true }
+			)
+			.then((res) => {
+				toast.success(res.data.message);
+				setOpen(false);
+			})
+			.catch((error) => {
+				toast.error(error.response?.data?.message);
+				setOpen(false);
+			});
+	};
 
 	return (
 		<div className={`py-4 min-h-screen ${styles.section}`}>
@@ -108,7 +132,7 @@ const UserOrderDetails = () => {
 							Give a Rating{" "}
 							<span className="text-red-500">*</span>
 						</h5>
-						<div className="flex w0full ml-2 pt-1">
+						<div className="flex w-full ml-2 pt-1">
 							{[1, 2, 3, 4, 5].map((i) =>
 								rating >= i ? (
 									<AiFillStar
@@ -141,6 +165,8 @@ const UserOrderDetails = () => {
 								name="comment"
 								id=""
 								maxLength={500}
+								value={comment}
+								onChange={(e) => setComment(e.target.value)}
 								className="mt-2 appearance-none block w-[95%]
 								p-3 h-[300px] border border-gray-300
 								rounded-[3px] placeholder-gray-400
@@ -148,12 +174,14 @@ const UserOrderDetails = () => {
 								focus:border-blue-500 resize-none pb-4"
 							></textarea>
 						</div>
-						<div
-							className={`${styles.button}text-[20px] ml-3 cursor-pointer `}
-							onClick={reviewHandler}
-						>
-							<span className="text-white">Submit</span>
-						</div>
+						{rating > 0 ? (
+							<div
+								className={`${styles.button}text-[20px] ml-3 cursor-pointer `}
+								onClick={reviewHandler}
+							>
+								<span className="text-white">Submit</span>
+							</div>
+						) : null}
 					</div>
 				</div>
 			)}

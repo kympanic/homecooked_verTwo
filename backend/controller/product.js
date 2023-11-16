@@ -104,21 +104,31 @@ router.delete(
 //add review for a product
 router.put(
 	"/create-review",
+	isAuthenticated,
 	catchAsyncErrors(async (req, res, next) => {
 		try {
 			const { user, rating, comment, productId } = req.body;
 			const product = await Product.findById(productId);
+
+			const review = {
+				user,
+				rating,
+				comment,
+				productId,
+			};
+
 			const isReviewed = product.reviews.find(
-				(review) => review.user._id === req.user._id
+				(review) =>
+					review.user._id.toString() === req.user._id.toString()
 			);
+
 			if (isReviewed) {
-				product.reviews.forEach((review) => {
-					if (review.user._id === req.user._id) {
-						(review.rating = rating),
-							(review.comment = comment),
-							(review.user = user);
-					}
-				});
+				return next(
+					new ErrorHandler(
+						"You have already reviewed this product",
+						400
+					)
+				);
 			} else {
 				product.reviews.push(review);
 			}
@@ -130,13 +140,10 @@ router.put(
 			product.avgRating = totalRatings / product.reviews.length;
 
 			await product.save({ validateBeforeSave: false });
-			res.status(
-				200,
-				json({
-					success: true,
-					message: "Reviewed successfully!",
-				})
-			);
+			res.status(201).json({
+				success: true,
+				message: "Reviewed successfully!",
+			});
 		} catch (error) {
 			return next(new ErrorHandler(error, 400));
 		}
