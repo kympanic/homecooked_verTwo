@@ -42,7 +42,6 @@ const ProductCard = ({ data }) => {
 
 	const removeFromFavoritesHandler = (data) => {
 		setClick(!click);
-
 		dispatch(deleteUserFavorite(data?._id));
 	};
 	const addToCartHandler = (id) => {

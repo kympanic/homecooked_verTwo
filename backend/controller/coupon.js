@@ -72,7 +72,7 @@ router.post(
 	})
 );
 
-//delete product
+//delete coupon
 router.delete(
 	"/delete-coupon/:id",
 	isSeller,

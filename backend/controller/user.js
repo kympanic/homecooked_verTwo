@@ -357,4 +357,31 @@ router.post(
 	})
 );
 
+router.delete(
+	`/delete-favorite/:id`,
+	isAuthenticated,
+	catchAsyncErrors(async (req, res, next) => {
+		try {
+			const user = await User.findById(req.user.id);
+			const productId = req.params.id;
+
+			console.log(productId, "this is the product id");
+			console.log(user, "this is the user");
+
+			if (user.favorites.includes(productId)) {
+				user.favorites = user.favorites.filter(
+					(favId) => favId && favId.toString() !== productId
+				);
+				await user.save();
+			}
+			res.status(200).json({
+				success: true,
+				user,
+			});
+		} catch (error) {
+			return next(new ErrorHandler(error.message, 500));
+		}
+	})
+);
+
 module.exports = router;
