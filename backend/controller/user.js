@@ -365,9 +365,6 @@ router.delete(
 			const user = await User.findById(req.user.id);
 			const productId = req.params.id;
 
-			console.log(productId, "this is the product id");
-			console.log(user, "this is the user");
-
 			if (user.favorites.includes(productId)) {
 				user.favorites = user.favorites.filter(
 					(favId) => favId && favId.toString() !== productId

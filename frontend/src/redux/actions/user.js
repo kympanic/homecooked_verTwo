@@ -89,7 +89,7 @@ export const updateUserAddress =
 export const addUserFavorite = (id) => async (dispatch) => {
 	try {
 		dispatch({
-			type: "addUserFavorite",
+			type: "AddUserFavorite",
 		});
 		const { data } = await axios.post(
 			`${server}/user/add-favorite`,
@@ -99,12 +99,12 @@ export const addUserFavorite = (id) => async (dispatch) => {
 			{ withCredentials: true }
 		);
 		dispatch({
-			type: "addUserFavoriteSuccess",
+			type: "AddUserFavoriteSuccess",
 			payload: data.user,
 		});
 	} catch (error) {
 		dispatch({
-			type: "addUserFavoriteFail",
+			type: "AddUserFavoriteFail",
 			payload: error.response.data.message,
 		});
 	}
@@ -114,7 +114,7 @@ export const addUserFavorite = (id) => async (dispatch) => {
 export const deleteUserFavorite = (id) => async (dispatch) => {
 	try {
 		dispatch({
-			type: "deleteUserFavoriteRequest",
+			type: "DeleteUserFavoriteRequest",
 		});
 
 		const { data } = await axios.delete(
@@ -122,7 +122,7 @@ export const deleteUserFavorite = (id) => async (dispatch) => {
 			{ withCredentials: true }
 		);
 		dispatch({
-			type: "deleteUserFavoriteSuccess",
+			type: "DeleteUserFavoriteSuccess",
 			payload: {
 				successMessage: "Favorite removed successfully!",
 				user: data.user,
@@ -130,7 +130,7 @@ export const deleteUserFavorite = (id) => async (dispatch) => {
 		});
 	} catch (error) {
 		dispatch({
-			type: "deleteUserFavoriteFail",
+			type: "DeleteUserFavoriteFail",
 			payload: error.response.data.message,
 		});
 	}

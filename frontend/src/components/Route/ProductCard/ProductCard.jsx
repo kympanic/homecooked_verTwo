@@ -19,29 +19,26 @@ import {
 } from "../../../redux/actions/user";
 
 const ProductCard = ({ data }) => {
-	const { favorites } = useSelector((state) => state.favorites);
 	const { cart } = useSelector((state) => state.cart);
+	const { user } = useSelector((state) => state.user);
 	const [click, setClick] = useState(false);
 	const [open, setOpen] = useState(false);
 	const dispatch = useDispatch();
-	console.log(data, "this is the data");
 
-	// useEffect(() => {
-	// 	if (favorites && favorites.find((i) => i._id === data._id)) {
-	// 		setClick(true);
-	// 	} else {
-	// 		setClick(false);
-	// 	}
-	// }, [favorites, data._id]);
+	console.log(user, "this is the user");
+
+	useEffect(() => {
+		const isFavorite = user?.favorites?.some(
+			(favItem) => favItem === data._id
+		);
+		setClick(isFavorite);
+	}, [user?.favorites, data._id]);
 
 	const addToFavoritesHandler = async (data) => {
-		setClick(!click);
-		console.log(data?._id);
 		dispatch(addUserFavorite(data?._id));
 	};
 
 	const removeFromFavoritesHandler = (data) => {
-		setClick(!click);
 		dispatch(deleteUserFavorite(data?._id));
 	};
 	const addToCartHandler = (id) => {

@@ -3,7 +3,7 @@ import { userReducer } from "./reducers/user";
 import { productReducer } from "./reducers/product";
 import { shopReducer } from "./reducers/shop";
 import { cartReducer } from "./reducers/cart";
-import { favoritesReducer } from "./reducers/favorites";
+// import { favoritesReducer } from "./reducers/favorites";
 import { orderReducer } from "./reducers/order";
 
 const Store = configureStore({
@@ -12,7 +12,7 @@ const Store = configureStore({
 		products: productReducer,
 		shop: shopReducer,
 		cart: cartReducer,
-		favorites: favoritesReducer,
+		// favorites: favoritesReducer,
 		orders: orderReducer,
 	},
 });
