@@ -20,7 +20,6 @@ const UserOrderDetails = () => {
 	const [comment, setComment] = useState("");
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [rating, setRating] = useState(0);
-	console.log(rating, "this is the rating");
 
 	useEffect(() => {
 		dispatch(getAllOrdersUser(user._id));
@@ -42,6 +41,8 @@ const UserOrderDetails = () => {
 			)
 			.then((res) => {
 				toast.success(res.data.message);
+				setComment("");
+				setRating(0);
 				setOpen(false);
 			})
 			.catch((error) => {

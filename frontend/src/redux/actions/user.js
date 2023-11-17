@@ -85,6 +85,57 @@ export const updateUserAddress =
 		}
 	};
 
+//add user favorites
+export const addUserFavorite = (id) => async (dispatch) => {
+	try {
+		dispatch({
+			type: "addUserFavorite",
+		});
+		const { data } = await axios.post(
+			`${server}/user/add-favorites`,
+			{
+				id,
+			},
+			{ withCredentials: true }
+		);
+		dispatch({
+			type: "addUserFavoriteSuccess",
+			payload: data.user,
+		});
+	} catch (error) {
+		dispatch({
+			type: "addUserFavoriteFail",
+			payload: error.response.data.message,
+		});
+	}
+};
+
+//remove from favorites
+export const deleteUserFavorite = (id) => async (dispatch) => {
+	try {
+		dispatch({
+			type: "deleteUserFavoriteRequest",
+		});
+
+		const { data } = await axios.delete(
+			`${server}/user/delete-favorite/${id}`,
+			{ withCredentials: true }
+		);
+		dispatch({
+			type: "deleteUserFavoriteSuccess",
+			payload: {
+				successMessage: "Favorite removed successfully!",
+				user: data.user,
+			},
+		});
+	} catch (error) {
+		dispatch({
+			type: "deleteUserFavoriteFail",
+			payload: error.response.data.message,
+		});
+	}
+};
+
 //delete user address
 export const deleteUserAddress = (id) => async (dispatch) => {
 	try {

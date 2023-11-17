@@ -150,7 +150,7 @@ router.get(
 	})
 );
 
-//logout ouser
+//logout user
 router.get(
 	"/logout",
 	isAuthenticated,
