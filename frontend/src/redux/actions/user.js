@@ -92,7 +92,7 @@ export const addUserFavorite = (id) => async (dispatch) => {
 			type: "addUserFavorite",
 		});
 		const { data } = await axios.post(
-			`${server}/user/add-favorites`,
+			`${server}/user/add-favorite`,
 			{
 				id,
 			},

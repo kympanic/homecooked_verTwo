@@ -11,12 +11,12 @@ import {
 } from "react-icons/ai";
 import { backend_url } from "../../../server";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	addToFavorites,
-	removeFromFavorites,
-} from "../../../redux/actions/favorites";
 import { toast } from "react-toastify";
 import { addToCart } from "../../../redux/actions/cart";
+import {
+	addUserFavorite,
+	deleteUserFavorite,
+} from "../../../redux/actions/user";
 
 const ProductCard = ({ data }) => {
 	const { favorites } = useSelector((state) => state.favorites);
@@ -24,25 +24,27 @@ const ProductCard = ({ data }) => {
 	const [click, setClick] = useState(false);
 	const [open, setOpen] = useState(false);
 	const dispatch = useDispatch();
+	console.log(data, "this is the data");
 
-	useEffect(() => {
-		if (favorites && favorites.find((i) => i._id === data._id)) {
-			setClick(true);
-		} else {
-			setClick(false);
-		}
-	}, [favorites, data._id]);
+	// useEffect(() => {
+	// 	if (favorites && favorites.find((i) => i._id === data._id)) {
+	// 		setClick(true);
+	// 	} else {
+	// 		setClick(false);
+	// 	}
+	// }, [favorites, data._id]);
 
-	const removeFromFavoritesHandler = () => {
+	const addToFavoritesHandler = async (data) => {
 		setClick(!click);
-		dispatch(removeFromFavorites(data));
+		console.log(data?._id);
+		dispatch(addUserFavorite(data?._id));
 	};
 
-	const addToFavoritesHandler = () => {
+	const removeFromFavoritesHandler = (data) => {
 		setClick(!click);
-		dispatch(addToFavorites(data));
-	};
 
+		dispatch(deleteUserFavorite(data?._id));
+	};
 	const addToCartHandler = (id) => {
 		const doesItemExist = cart && cart.find((i) => i._id === id);
 		if (doesItemExist) {
@@ -124,7 +126,7 @@ const ProductCard = ({ data }) => {
 							<AiFillHeart
 								size={22}
 								className="cursor-pointer absolute right-2 top-5"
-								onClick={() => removeFromFavoritesHandler()}
+								onClick={() => removeFromFavoritesHandler(data)}
 								color={click ? "red" : "#333"}
 								title="Remove from favorites"
 							/>
@@ -132,7 +134,7 @@ const ProductCard = ({ data }) => {
 							<AiOutlineHeart
 								size={22}
 								className="cursor-pointer absolute right-2 top-5"
-								onClick={() => addToFavoritesHandler()}
+								onClick={() => addToFavoritesHandler(data)}
 								color={click ? "red" : "#333"}
 								title="Add to favorites"
 							/>

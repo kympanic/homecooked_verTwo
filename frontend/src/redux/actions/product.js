@@ -72,7 +72,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 			type: "deleteProductRequest",
 		});
 		const { data } = await axios.delete(
-			`${server}/product//delete-product/${id}`,
+			`${server}/product/delete-product/${id}`,
 			{ withCredentials: true }
 		);
 		dispatch({

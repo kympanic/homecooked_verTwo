@@ -32,6 +32,34 @@ export const userReducer = createReducer(initialState, {
 		state.error = action.payload;
 	},
 
+	//add user favorite
+
+	AddUserFavoriteRequest: (state) => {
+		state.favoriteloading = true;
+	},
+	AddUserFavoriteSuccess: (state, action) => {
+		state.favoriteloading = false;
+		state.user = action.payload;
+	},
+	AddUserFavoriteFail: (state, action) => {
+		state.favoriteloading = true;
+		state.error = action.payload;
+	},
+
+	//remove user favorite
+	DeleteUserFavoriteRequest: (state) => {
+		state.favoriteloading = true;
+	},
+	DeleteUserFavoriteSuccess: (state, action) => {
+		state.favoriteloading = false;
+		state.successMessage = action.payload.successMessage;
+		state.user = action.payload.user;
+	},
+	DeleteUserFavoriteFail: (state, action) => {
+		state.favoriteloading = false;
+		state.error = action.payload;
+	},
+
 	//update user address
 	UpdateUserAddressRequest: (state) => {
 		state.addressloading = true;

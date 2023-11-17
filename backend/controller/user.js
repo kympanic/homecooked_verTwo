@@ -335,4 +335,26 @@ router.put(
 	})
 );
 
+router.post(
+	"/add-favorite",
+	isAuthenticated,
+	catchAsyncErrors(async (req, res, next) => {
+		try {
+			const user = await User.findById(req.user.id);
+			const productId = req.body.id;
+
+			if (!user.favorites.includes(productId)) {
+				user.favorites.push(productId);
+				await user.save();
+			}
+			res.status(200).json({
+				success: true,
+				user,
+			});
+		} catch (error) {
+			return next(new ErrorHandler(error.message, 500));
+		}
+	})
+);
+
 module.exports = router;
