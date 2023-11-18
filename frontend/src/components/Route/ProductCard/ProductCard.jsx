@@ -25,8 +25,6 @@ const ProductCard = ({ data }) => {
 	const [open, setOpen] = useState(false);
 	const dispatch = useDispatch();
 
-	console.log(user, "this is the user");
-
 	useEffect(() => {
 		const isFavorite = user?.favorites?.some(
 			(favItem) => favItem === data._id

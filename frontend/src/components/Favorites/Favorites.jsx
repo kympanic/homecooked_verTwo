@@ -5,27 +5,32 @@ import styles from "../../styles/styles";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/actions/cart";
-import { removeFromFavorites } from "../../redux/actions/favorites";
 import { backend_url } from "../../server";
 
 const Favorites = ({ setOpenFavorites }) => {
-	const { favorites } = useSelector((state) => state.favorites);
+	const { user } = useSelector((state) => state.user);
+	const { allProducts } = useSelector((state) => state.products);
 	const dispatch = useDispatch();
 
-	const removeFromFavoritesHandler = (data) => {
-		dispatch(removeFromFavorites(data));
-	};
+	const userFavs = user?.favorites;
+	console.log(userFavs, "these are the user favs");
 
-	const addToCartHandler = (data) => {
-		const newData = { ...data, qty: 1 };
-		dispatch(addToCart(newData));
-		setOpenFavorites(false);
-	};
+	console.log(allProducts, "these are all the products");
+
+	// const removeFromFavoritesHandler = (data) => {
+	// 	dispatch(removeFromFavorites(data));
+	// };
+
+	// const addToCartHandler = (data) => {
+	// 	const newData = { ...data, qty: 1 };
+	// 	dispatch(addToCart(newData));
+	// 	setOpenFavorites(false);
+	// };
 
 	return (
 		<div className="fixed top-0 left-0 w-full bg-[#0000004b] h-screen z-10">
 			<div className="fixed top-0 right-0 h-full w-[80%] overflow-y-scroll 800px:w-[25%] bg-white flex flex-col justify-between shadow-sm">
-				{favorites && favorites.length === 0 ? (
+				{user?.favorites && user?.favorites.length === 0 ? (
 					<div className="w-full h-screen flex items-center justify-center">
 						<div className="flex w-full justify-end pt-5 pr-5 fixed top-3 right-3">
 							<RxCross1
@@ -50,22 +55,23 @@ const Favorites = ({ setOpenFavorites }) => {
 							<div className={`${styles.normalFlex} p-4`}>
 								<AiOutlineHeart size={25} />
 								<h5 className="pl-2 text-[20px] font-[500]">
-									{favorites && favorites.length} items
+									{user?.favorites && user.favorites.length}{" "}
+									items
 								</h5>
 							</div>
 
 							{/* favorites Single Items */}
 							<br />
 							<div className="w-full border-t">
-								{favorites &&
-									favorites.map((i, index) => (
+								{user?.favorites &&
+									user?.favorites?.map((i, index) => (
 										<FavoriteSingle
 											key={index}
 											data={i}
-											removeFromFavoritesHandler={
-												removeFromFavoritesHandler
-											}
-											addToCartHandler={addToCartHandler}
+											// removeFromFavoritesHandler={
+											// 	removeFromFavoritesHandler
+											// }
+											// addToCartHandler={addToCartHandler}
 										/>
 									))}
 							</div>
@@ -79,18 +85,19 @@ const Favorites = ({ setOpenFavorites }) => {
 
 const FavoriteSingle = ({
 	data,
-	removeFromFavoritesHandler,
-	addToCartHandler,
+	// removeFromFavoritesHandler,
+	// addToCartHandler,
 }) => {
 	const [value, setValue] = useState(1);
 	const totalPrice = data.price * value;
+	console.log(data, "this is the data");
 
 	return (
 		<div className="border-b p-4">
-			<div className="w-full 800px:flex justify-start items-center">
+			{/* <div className="w-full 800px:flex justify-start items-center">
 				<RxCross1
 					className="cursor-pointer 800px:mb-['unset'] 800px:ml-['unset'] mb-4 ml-5 mr-5"
-					onClick={() => removeFromFavoritesHandler(data)}
+					// onClick={() => removeFromFavoritesHandler(data)}
 				/>
 				<img
 					src={`${backend_url}${data.images[0]}`}
@@ -105,12 +112,12 @@ const FavoriteSingle = ({
 					</h4>
 					<div
 						className={`${styles.button} cursor-pointer mt-10`}
-						onClick={() => addToCartHandler(data)}
+						// onClick={() => addToCartHandler(data)}
 					>
 						<span className="text-white">Add to Cart</span>
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };

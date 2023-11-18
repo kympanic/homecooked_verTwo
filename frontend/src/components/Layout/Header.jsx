@@ -15,7 +15,7 @@ import {
 } from "react-icons/ai";
 import { backend_url } from "../../server";
 import Cart from "../Cart/Cart";
-// import Favorites from "../Favorites/Favorites";
+import Favorites from "../Favorites/Favorites";
 
 const Header = ({ activeHeading }) => {
 	const { isAuthenticated, user } = useSelector((state) => state?.user);
@@ -172,9 +172,9 @@ const Header = ({ activeHeading }) => {
 									size={30}
 									color="rgb(255 255 255/ 83%)"
 								/>
-								{/* <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-									{favorites && favorites.length}
-								</span> */}
+								<span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+									{user?.favorites && user?.favorites?.length}
+								</span>
 							</div>
 						</div>
 						<div className={`${styles.normalFlex}`}>
@@ -214,9 +214,9 @@ const Header = ({ activeHeading }) => {
 						{/* Open Cart */}
 						{openCart ? <Cart setOpenCart={setOpenCart} /> : null}
 						{/* Open Wishlist */}
-						{/* {openFavorites ? (
+						{openFavorites ? (
 							<Favorites setOpenFavorites={setOpenFavorites} />
-						) : null} */}
+						) : null}
 					</div>
 				</div>
 			</div>

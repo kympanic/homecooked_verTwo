@@ -123,10 +123,7 @@ export const deleteUserFavorite = (id) => async (dispatch) => {
 		);
 		dispatch({
 			type: "DeleteUserFavoriteSuccess",
-			payload: {
-				successMessage: "Favorite removed successfully!",
-				user: data.user,
-			},
+			payload: data.user,
 		});
 	} catch (error) {
 		dispatch({

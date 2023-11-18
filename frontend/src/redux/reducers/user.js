@@ -52,7 +52,6 @@ export const userReducer = createReducer(initialState, {
 	},
 	DeleteUserFavoriteSuccess: (state, action) => {
 		state.favoriteloading = false;
-		state.successMessage = action.payload.successMessage;
 		state.user = action.payload;
 	},
 	DeleteUserFavoriteFail: (state, action) => {

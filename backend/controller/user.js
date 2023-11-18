@@ -362,18 +362,17 @@ router.delete(
 	isAuthenticated,
 	catchAsyncErrors(async (req, res, next) => {
 		try {
-			const user = await User.findById(req.user.id);
 			const productId = req.params.id;
 
-			if (user.favorites.includes(productId)) {
-				user.favorites = user.favorites.filter(
-					(favId) => favId && favId.toString() !== productId
-				);
-				await user.save();
-			}
+			await User.findByIdAndUpdate(req.user.id, {
+				$pull: { favorites: productId },
+			});
+
+			const updatedUser = await User.findById(req.user.id);
+
 			res.status(200).json({
 				success: true,
-				user,
+				user: updatedUser,
 			});
 		} catch (error) {
 			return next(new ErrorHandler(error.message, 500));
