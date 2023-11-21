@@ -6,6 +6,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/actions/cart";
 import { backend_url } from "../../server";
+import { deleteUserFavorite } from "../../redux/actions/user";
 
 const Favorites = ({ setOpenFavorites }) => {
 	const { user } = useSelector((state) => state.user);
@@ -13,19 +14,19 @@ const Favorites = ({ setOpenFavorites }) => {
 	const dispatch = useDispatch();
 
 	const userFavs = user?.favorites;
-	console.log(userFavs, "these are the user favs");
+	const filteredProducts = allProducts.filter((product) =>
+		userFavs?.includes(product._id)
+	);
 
-	console.log(allProducts, "these are all the products");
+	const removeFromFavoritesHandler = (data) => {
+		dispatch(deleteUserFavorite(data._id));
+	};
 
-	// const removeFromFavoritesHandler = (data) => {
-	// 	dispatch(removeFromFavorites(data));
-	// };
-
-	// const addToCartHandler = (data) => {
-	// 	const newData = { ...data, qty: 1 };
-	// 	dispatch(addToCart(newData));
-	// 	setOpenFavorites(false);
-	// };
+	const addToCartHandler = (data) => {
+		const newData = { ...data, qty: 1 };
+		dispatch(addToCart(newData));
+		setOpenFavorites(false);
+	};
 
 	return (
 		<div className="fixed top-0 left-0 w-full bg-[#0000004b] h-screen z-10">
@@ -63,15 +64,15 @@ const Favorites = ({ setOpenFavorites }) => {
 							{/* favorites Single Items */}
 							<br />
 							<div className="w-full border-t">
-								{user?.favorites &&
-									user?.favorites?.map((i, index) => (
+								{filteredProducts &&
+									filteredProducts?.map((i, index) => (
 										<FavoriteSingle
 											key={index}
 											data={i}
-											// removeFromFavoritesHandler={
-											// 	removeFromFavoritesHandler
-											// }
-											// addToCartHandler={addToCartHandler}
+											removeFromFavoritesHandler={
+												removeFromFavoritesHandler
+											}
+											addToCartHandler={addToCartHandler}
 										/>
 									))}
 							</div>
@@ -85,26 +86,25 @@ const Favorites = ({ setOpenFavorites }) => {
 
 const FavoriteSingle = ({
 	data,
-	// removeFromFavoritesHandler,
-	// addToCartHandler,
+	removeFromFavoritesHandler,
+	addToCartHandler,
 }) => {
 	const [value, setValue] = useState(1);
 	const totalPrice = data.price * value;
-	console.log(data, "this is the data");
 
 	return (
 		<div className="border-b p-4">
-			{/* <div className="w-full 800px:flex justify-start items-center">
+			<div className="w-full 800px:flex justify-start items-center">
 				<RxCross1
 					className="cursor-pointer 800px:mb-['unset'] 800px:ml-['unset'] mb-4 ml-5 mr-5"
-					// onClick={() => removeFromFavoritesHandler(data)}
+					size={25}
+					onClick={() => removeFromFavoritesHandler(data)}
 				/>
 				<img
 					src={`${backend_url}${data.images[0]}`}
 					alt=""
 					className="w-[130px] h-min ml-2 mr-5 rounded-[5px]"
 				/>
-
 				<div className="pl-[5px]">
 					<h1>{data.name}</h1>
 					<h4 className="font-[600] pt-3 800px:pt-[3px] text-[17px] text-[#d02222] font-Roboto">
@@ -112,12 +112,12 @@ const FavoriteSingle = ({
 					</h4>
 					<div
 						className={`${styles.button} cursor-pointer mt-10`}
-						// onClick={() => addToCartHandler(data)}
+						onClick={() => addToCartHandler(data)}
 					>
 						<span className="text-white">Add to Cart</span>
 					</div>
 				</div>
-			</div> */}
+			</div>
 		</div>
 	);
 };
