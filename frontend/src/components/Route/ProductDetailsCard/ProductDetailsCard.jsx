@@ -13,25 +13,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addToCart } from "../../../redux/actions/cart";
 import {
-	addToFavorites,
-	removeFromFavorites,
-} from "../../../redux/actions/favorites";
+	addUserFavorite,
+	deleteUserFavorite,
+} from "../../../redux/actions/user";
 
 const ProductDetailsCard = ({ setOpen, data }) => {
 	const { cart } = useSelector((state) => state.cart);
+	const { user } = useSelector((state) => state.user);
 	const [count, setCount] = useState(1);
 	const [click, setClick] = useState(false);
 	const dispatch = useDispatch();
-	const { favorites } = useSelector((state) => state.favorites);
-	// const [select, setSelect] = useState(false);
 
 	useEffect(() => {
-		if (favorites && favorites.find((i) => i._id === data._id)) {
-			setClick(true);
-		} else {
-			setClick(false);
-		}
-	}, [favorites, data._id]);
+		const isFavorite = user?.favorites?.some(
+			(favItem) => favItem === data._id
+		);
+		setClick(isFavorite);
+	}, [user?.favorites, data._id]);
 
 	const handleMessageSubmit = () => {};
 
@@ -59,15 +57,22 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 		}
 	};
 
-	const removeFromFavoritesHandler = () => {
-		setClick(!click);
-		dispatch(removeFromFavorites(data));
+	const addToFavoritesHandler = async (data) => {
+		dispatch(addUserFavorite(data?._id));
 	};
 
-	const addToFavoritesHandler = () => {
-		setClick(!click);
-		dispatch(addToFavorites(data));
+	const removeFromFavoritesHandler = (data) => {
+		dispatch(deleteUserFavorite(data?._id));
 	};
+	// const removeFromFavoritesHandler = () => {
+	// 	setClick(!click);
+	// 	dispatch(removeFromFavorites(data));
+	// };
+
+	// const addToFavoritesHandler = () => {
+	// 	setClick(!click);
+	// 	dispatch(addToFavorites(data));
+	// };
 	return (
 		<div className="bg-[#fff]">
 			{data ? (
@@ -153,7 +158,9 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 												size={30}
 												className="cursor-pointer"
 												onClick={() =>
-													removeFromFavoritesHandler()
+													removeFromFavoritesHandler(
+														data
+													)
 												}
 												color={click ? "red" : "#333"}
 												title="Remove from favorites"
@@ -163,7 +170,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 												size={30}
 												className="cursor-pointer"
 												onClick={() =>
-													addToFavoritesHandler()
+													addToFavoritesHandler(data)
 												}
 												title="Add to favorites"
 											/>
