@@ -107,7 +107,7 @@ router.put(
 	isAuthenticated,
 	catchAsyncErrors(async (req, res, next) => {
 		try {
-			const { user, rating, comment, productId } = req.body;
+			const { user, rating, comment, productId, orderId } = req.body;
 			const product = await Product.findById(productId);
 
 			const review = {
@@ -140,6 +140,7 @@ router.put(
 			product.avgRating = totalRatings / product.reviews.length;
 
 			await product.save({ validateBeforeSave: false });
+
 			res.status(201).json({
 				success: true,
 				message: "Reviewed successfully!",

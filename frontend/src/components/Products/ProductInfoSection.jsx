@@ -5,6 +5,7 @@ import { backend_url } from "../../server";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsShop } from "../../redux/actions/product";
 import { AiOutlineMessage } from "react-icons/ai";
+import Ratings from "./Ratings";
 
 const ProductInfoSection = ({ data, products }) => {
 	const [active, setActive] = useState(1);
@@ -57,8 +58,29 @@ const ProductInfoSection = ({ data, products }) => {
 			) : null}
 			{active === 2 ? (
 				<>
-					<p className="w-full justify-center min-h-[40vh] flex items-center">
-						No Reviews Yet!
+					<p className="w-full justify-center min-h-[40vh] flex flex-col items-center">
+						{data &&
+							data.reviews?.map((item, index) => (
+								<div className="w-full flex my-2">
+									<img
+										src={`${backend_url}/${item.user.avatar}`}
+										alt="profile"
+										className="w-[50px] h-[50px] rounded-full"
+									/>
+									<div>
+										<h1 className="pl-2 font-[500]">
+											{item.user.name}
+										</h1>
+										<Ratings rating={item?.rating} />
+										<p className="pl-2">{item.comment}</p>
+									</div>
+								</div>
+							))}
+						<div className="w-full flex-justify-center">
+							{data && data.reviews.length === 0 && (
+								<h5>Currently no reviews for this product</h5>
+							)}
+						</div>
 					</p>
 				</>
 			) : null}

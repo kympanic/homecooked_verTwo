@@ -5,6 +5,7 @@ import ProductDetailsCard from "../ProductDetailsCard/ProductDetailsCard.jsx";
 import {
 	AiFillHeart,
 	AiFillStar,
+	AiOutlineStar,
 	AiOutlineEye,
 	AiOutlineHeart,
 	AiOutlineShoppingCart,
@@ -24,6 +25,7 @@ const ProductCard = ({ data }) => {
 	const [click, setClick] = useState(false);
 	const [open, setOpen] = useState(false);
 	const dispatch = useDispatch();
+	console.log(data, "this is the data");
 
 	useEffect(() => {
 		const isFavorite = user?.favorites?.some(
