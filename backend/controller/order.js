@@ -97,7 +97,7 @@ router.put(
 			if (!order) {
 				return next(new ErrorHandler("Order not found", 400));
 			}
-			if (req.body.status === "Shipping") {
+			if (req.body.status === "Delivered") {
 				order.cart.forEach(async (o) => {
 					await updateProduct(o._id, o.qty);
 				});

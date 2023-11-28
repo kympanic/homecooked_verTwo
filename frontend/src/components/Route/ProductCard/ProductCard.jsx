@@ -18,6 +18,7 @@ import {
 	addUserFavorite,
 	deleteUserFavorite,
 } from "../../../redux/actions/user";
+import Ratings from "../../Products/Ratings";
 
 const ProductCard = ({ data }) => {
 	const { cart } = useSelector((state) => state.cart);
@@ -73,37 +74,13 @@ const ProductCard = ({ data }) => {
 						</h5>
 					</Link>
 					<Link to={`/product/${data._id}`}>
-						<h4 className="pb-3 font-[500]">
+						<h4 className="truncate pb-3 font-[500]">
 							{data.name.length > 40
 								? data.name.slice(0, 40) + "..."
 								: data.name}
 						</h4>
 						<div className="flex">
-							<AiFillStar
-								className="mr-2 cursor-pointer"
-								size={20}
-								color="#F6BA00"
-							/>
-							<AiFillStar
-								className="mr-2 cursor-pointer"
-								size={20}
-								color="#F6BA00"
-							/>
-							<AiFillStar
-								className="mr-2 cursor-pointer"
-								size={20}
-								color="#F6BA00"
-							/>
-							<AiFillStar
-								className="mr-2 cursor-pointer"
-								size={20}
-								color="#F6BA00"
-							/>
-							<AiFillStar
-								className="mr-2 cursor-pointer"
-								size={20}
-								color="#F6BA00"
-							/>
+							<Ratings rating={data?.avgRating} />
 						</div>
 						<div className="py-2 flex items-center justify-between">
 							<div className="flex">

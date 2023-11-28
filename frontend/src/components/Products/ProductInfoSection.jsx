@@ -58,20 +58,23 @@ const ProductInfoSection = ({ data, products }) => {
 			) : null}
 			{active === 2 ? (
 				<>
-					<p className="w-full justify-center min-h-[40vh] flex flex-col items-center">
+					<p className="w-full r min-h-[40vh] flex flex-col items-center py-3">
 						{data &&
 							data.reviews?.map((item, index) => (
-								<div className="w-full flex my-2">
+								<div className="w-full flex my-2 mt-3">
 									<img
 										src={`${backend_url}/${item.user.avatar}`}
 										alt="profile"
 										className="w-[50px] h-[50px] rounded-full"
 									/>
-									<div>
-										<h1 className="pl-2 font-[500]">
-											{item.user.name}
-										</h1>
-										<Ratings rating={item?.rating} />
+									<div className="pl-2">
+										<div className="w-full flex items-center">
+											<h1 className="pl-2 font-[500] mr-3">
+												{item.user.name}
+											</h1>
+
+											<Ratings rating={item?.rating} />
+										</div>
 										<p className="pl-2">{item.comment}</p>
 									</div>
 								</div>
