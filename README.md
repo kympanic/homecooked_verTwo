@@ -9,7 +9,6 @@ This project uses the MERN stack and has updated visuals, user experience, and e
 LIVE Old Version: [Homecooked](
 https://github.com/kympanic/homecooked/)
 
-https://github.com/kympanic/homecooked
 Some days we're just too tired to cook. Homecooked is for the individual who wants a warm meal without foregoing on the quality. Homecooked is a one stop shop for finding local vendors that will cook up your next delicious meal. 
 
 
