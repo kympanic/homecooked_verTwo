@@ -6,9 +6,10 @@ By [Daniel Yoo](https://github.com/kympanic)
 This is a remake of a group project that was completed at App Academy. It is currently a work in progress and is not live!
 This project uses the MERN stack and has updated visuals, user experience, and extra features compared to Homecooked Version 1.0
 
-LIVE Old Version: [Homecooked](https://home-cooked.onrender.com/)
+LIVE Old Version: [Homecooked](
+https://github.com/kympanic/homecooked/)
 
-
+https://github.com/kympanic/homecooked
 Some days we're just too tired to cook. Homecooked is for the individual who wants a warm meal without foregoing on the quality. Homecooked is a one stop shop for finding local vendors that will cook up your next delicious meal. 
 
 
